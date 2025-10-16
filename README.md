@@ -18,7 +18,7 @@ Ce projet a pour objectif de modéliser et simuler un **réseau électrique** si
 
 - Représenter un réseau simplifié avec uniquement des générateurs et des maisons.
 
-- Simuler les connections possibles entre les génératerus et les maisons.
+- Simuler les connections possibles entre les générateurs et les maisons.
 
 - Calculer le coût d'une solution et le minimiser.
 
