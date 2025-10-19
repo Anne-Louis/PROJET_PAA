@@ -3,12 +3,12 @@ package main;
 public class Maison {
     private String nom;
     private NiveauConsommation niveau;
-    private Generateur generateur;
+    private Connexion connexion;
 
-    public House(String nom, NiveauConsommation niveau) {
+    public Maison(String nom, NiveauConsommation niveau) {
         this.nom = nom;
         this.niveau = niveau;
-        this.generateur = null;
+        this.connexion = null;
     }
 
     public String getNom() {
@@ -19,22 +19,22 @@ public class Maison {
         return niveau;
     }
 
-    public Generateur getGenerateur() {
-        return generateur;
+    public Connexion getConnexion() {
+        return connexion;
     }
 
-    public void setGenerator(Generateur generateur) {
-        this.generateur = generateur;
+    public void setConnexion(Connexion connexion) {
+        this.connexion = connexion;
     }
 
     public int getConsommation() {
-        return niveu.getValeur();
+        return niveau.getValeur();
     }
 
     @Override
     public String toString() {
-        String genNom = (generateur != null) ? generateur.getNom() : "Aucun";
+        String ConNom = (connexion != null) ? connexion.getGenerateur().getNom() : "Aucun";
         return "Maison " + nom +
-               " (" + niveau + ", " + getConsommation() + " kW) → Générateur : " + genNom;
+               " (" + niveau + ", " + getConsommation() + " kW) → Générateur : " + ConNom;
     }
 }
