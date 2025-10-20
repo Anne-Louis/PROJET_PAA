@@ -6,27 +6,59 @@ public class Reseau {
     private liste<Generateur> generateurs;
     private liste<Maison> maisons;
     private Liste<Connexion> connexions;
+    private int lampda;
+    private double totalCout;
     
     public Reseau(){
         generateurs = new ArrayListe<Generateur>();
         maisons = new ArrayListe<Maison>();
         connexions = new ArrayListe<Connexion>();
+        lampda = 10; totalCout = 0.0;
     }
-
     public Reseau(liste<Generateur> gens, liste<Maison> msns, liste<Connexion> conns){
         this.generateurs = gens;
         this.maisons = msns;
         this.connexions = conns;
+        lampda = 10;totalCout = 0.0;
     }
     public Reseau(Reseau r){
         this.generateurs = r.getGenerateurs();
         this.maisons = r.getMaisons();
         this.connexions = r.getConnexions();
+        this.lampda = r.lampda;
+        this.totalCout = r.totalCout;
+    }
+    
+    @Override
+    public string toSring(){
+        String res = "RESEAU ELECTRIQUE\n";
+        res += "Generateurs:\n|";
+        for (Generateur gen : this.generateurs){
+            res +="--------------------------------------------------------------------------------------\n|\t"+ gen.getNom() + "-\t" + gen.getCapacite() + " KW \t Taux d'utilisation: " + Math.round(gen.calculTauxUtilisation()*100)+ "%\n";
+            for (Connexion msn : gen.getMaisons()) {
+                res += "\t" + msn.getMaison().getNom() + "("+msn.getMaison().getNiveauConsommation()+")|\n";
+            }
+        }     
+        res += "--------------------------------------------------------------------------------------\n";
+        
+        return res;
     }
 
     public double calculerCoutReseau(){
-    //implementation à faire
-        return 0.0;
+        double capaciteMoyenne = 0;
+        double dispertionReseau = 0;
+        double surchargeReseau = 0;
+
+        for (Generateur gen : this.generateurs)
+            capaciteMoyenne += gen.calculTauxUtilisation();
+        capaciteMoyenne /= this.generateurs.size();
+        for (Generateur gen : this.generateurs){
+            dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
+            surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
+        }
+        this.totalCout = (surchargeReseau * lampda) + dispertionReseau;
+
+        return totalCout;
     }
 
     public boolean modifierConnexion(Connexion oldConn, Connexion newConn){
