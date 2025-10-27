@@ -16,7 +16,4 @@ public enum NiveauConsommation {
         return valeur;
     }
 
-    /*public int setValeur(int valeur){
-
-    }*/
 }

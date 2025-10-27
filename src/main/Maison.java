@@ -31,6 +31,10 @@ public class Maison {
         return niveau.getValeur();
     }
 
+    public void setConsommation(NiveauConsommation niveau) {
+        this.niveau = niveau ;
+    }
+
     @Override
     public String toString() {
         String ConNom = (connexion != null) ? connexion.getGenerateur().getNom() : "Aucun";
