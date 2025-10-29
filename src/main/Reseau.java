@@ -83,8 +83,8 @@ public class Reseau {
             for(Connexion cons : this.connexions)
                 if (cons.getMaison().equals(msn))
                     nbConnexions++;
-            if (nbConnexions != 0) 
-                return false;      
+            /*if (nbConnexions != 0) 
+                return false; */ // A quoi sert cette condition ?     
         }
         
         if (totalCapacite >= totalConsommation)
