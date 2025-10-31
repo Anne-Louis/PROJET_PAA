@@ -5,7 +5,7 @@ public class Maison {
     private NiveauConsommation niveau;
     private Generateur generateur;
 
-    public House(String nom, NiveauConsommation niveau) {
+    public Maison(String nom, NiveauConsommation niveau) {
         this.nom = nom;
         this.niveau = niveau;
         this.generateur = null;
@@ -23,12 +23,12 @@ public class Maison {
         return generateur;
     }
 
-    public void setGenerator(Generateur generateur) {
+    public void setGenerateur(Generateur generateur) {
         this.generateur = generateur;
     }
 
     public int getConsommation() {
-        return niveu.getValeur();
+        return niveau.getValeur();
     }
 
     @Override
