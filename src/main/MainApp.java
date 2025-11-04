@@ -55,7 +55,7 @@ public class MainApp {
         genC.ajouterConnexion(con);
         maiC.setConnexion(con) ;
         reseau.ajouterConnexion(con) ;
-        System.out.println("La connexion a bien été crée !");
+        System.out.println("La connexion " + con.toString() + " a bien été crée !");
     }
 
     public static void menu1(){
@@ -90,7 +90,7 @@ public class MainApp {
                     }
                     Generateur gen = new Generateur(nom, cap);
                     reseau.ajouterGenerateur(gen) ;
-                    System.out.println("Le générateur a bien été crée !");
+                    System.out.println("Le générateur " + gen.getNom() + " a bien été crée !");
                     break ;
 
                 case 2 :
@@ -107,7 +107,7 @@ public class MainApp {
                     }
                     Maison maison = new Maison(nom, cons);
                     reseau.ajouterMaison(maison) ;
-                    System.out.println("La maison a bien été crée !");
+                    System.out.println("La maison " + maison.getNom() + " a bien été crée !");
                     break ;
 
                 case 3 :
