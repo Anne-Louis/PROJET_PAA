@@ -56,7 +56,7 @@ public class Reseau {
             dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
             surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
         }
-        this.totalCout = (surchargeReseau * lampda) + dispertionReseau;
+        this.totalCout = (Math.round(((surchargeReseau * lampda) + dispertionReseau)*1000.0))/1000.0;
         
         return this.totalCout;
     }
@@ -107,6 +107,10 @@ public class Reseau {
         if (conn == null)
             return false;
         return this.connexions.add(conn);
+    }
+
+    public boolean supprimerConnexion(Connexion c){
+        return this.connexions.remove(c) ;
     }
 
 

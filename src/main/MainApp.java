@@ -6,6 +6,58 @@ public class MainApp {
     private static Reseau reseau = new Reseau() ;
     private static Scanner sc = new Scanner(System.in) ;
 
+    public static void creerConnexion(){
+        System.out.println("Veuillez saisir la connexion à enregistrer  (ex : G1 M1 ou M1 G1) : ");
+        String ligne = sc.nextLine() ;
+        Generateur genC = null ;
+        Maison maiC = null ;
+
+        if (ligne.startsWith("G")){
+            for (Generateur g : reseau.getGenerateurs()){
+                if (g.getNom().equals(ligne.split("\\s")[0])){
+                    genC = g ;
+                }
+            }
+            for (Maison m : reseau.getMaisons()){
+                if (m.getNom().equals(ligne.split("\\s")[1])){
+                    maiC = m ;
+                }
+            }
+        } else if (ligne.startsWith("M")){
+            for (Generateur g : reseau.getGenerateurs()){
+                if (g.getNom().equals(ligne.split("\\s")[1])){
+                    genC = g ;
+                }
+            }
+            for (Maison m : reseau.getMaisons()){
+                if (m.getNom().equals(ligne.split("\\s")[0])){
+                    maiC = m ;
+                }
+            }
+        }
+
+        if (genC == null){
+            System.out.println("Le générateur n'existe pas, la création de la connexion n'est pas possible");
+            return ;
+        }
+        if (maiC == null){
+            System.out.println("La maison n'existe pas, la création de la connexion n'est pas possible");
+            return ;
+        }
+
+        Connexion con = new Connexion(genC, maiC) ;
+
+        for (Connexion c : reseau.getConnexions()){
+            if (con.equals(c)){
+                System.out.println("Cette connexion existe déjà") ;
+            }
+        }
+        genC.ajouterConnexion(con);
+        maiC.setConnexion(con) ;
+        reseau.ajouterConnexion(con) ;
+        System.out.println("La connexion a bien été crée !");
+    }
+
     public static void menu1(){
         boolean fin = false ;
 
@@ -59,56 +111,7 @@ public class MainApp {
                     break ;
 
                 case 3 :
-                    System.out.println("Veuillez saisir la connextion à enregistrer  (ex : G1 M1 ou M1 G1) : ");
-                    ligne = sc.nextLine() ;
-                    Generateur genC = null ;
-                    Maison maiC = null ;
-
-                    if (ligne.startsWith("G")){
-                        for (Generateur g : reseau.getGenerateurs()){
-                            if (g.getNom().equals(ligne.split("\\s")[0])){
-                                genC = g ;
-                            }
-                        }
-                        for (Maison m : reseau.getMaisons()){
-                            if (m.getNom().equals(ligne.split("\\s")[1])){
-                                maiC = m ;
-                            }
-                        }
-                    } else if (ligne.startsWith("M")){
-                        for (Generateur g : reseau.getGenerateurs()){
-                            if (g.getNom().equals(ligne.split("\\s")[1])){
-                                genC = g ;
-                            }
-                        }
-                        for (Maison m : reseau.getMaisons()){
-                            if (m.getNom().equals(ligne.split("\\s")[0])){
-                                maiC = m ;
-                            }
-                        }
-                    }
-
-                    if (genC == null){
-                        System.out.println("Le générateur n'existe pas, la création de la connexion n'est pas possible");
-                        break ;
-                    }
-                    if (maiC == null){
-                        System.out.println("La maison n'existe pas, la création de la connexion n'est pas possible");
-                        break ;
-                    }
-
-                    Connexion con = new Connexion(genC, maiC) ;
-
-                    for (Connexion c : reseau.getConnexions()){
-                        if (con.equals(c)){
-                            System.out.println("Cette connexion existe déjà") ;
-                            break ;
-                        }
-                    }
-                    genC.ajouterConnexion(con);
-                    maiC.setConnexion(con) ;
-                    reseau.ajouterConnexion(con) ;
-                    System.out.println("La connexion a bien été crée !");
+                    creerConnexion();
                     break ;
 
                 case 4 :
@@ -151,9 +154,9 @@ public class MainApp {
                     ligne = sc.nextLine();
                     Connexion oldCon = null ;
                     for (Connexion c : reseau.getConnexions()){
-                        if ((c.getGenerateur().getNom().equals(ligne.split("\\s")[0])) && (c.getGenerateur().getNom().equals(ligne.split("\\s")[1]))){
+                        if ((c.getGenerateur().getNom().equals(ligne.split("\\s")[0])) && (c.getMaison().getNom().equals(ligne.split("\\s")[1]))){
                             oldCon = c ;
-                        } else if ((c.getGenerateur().getNom().equals(ligne.split("\\s")[1])) && (c.getGenerateur().getNom().equals(ligne.split("\\s")[0]))){
+                        } else if ((c.getGenerateur().getNom().equals(ligne.split("\\s")[1])) && (c.getMaison().getNom().equals(ligne.split("\\s")[0]))){
                             oldCon = c ;
                         }
                     }
@@ -161,10 +164,11 @@ public class MainApp {
                         System.out.println("Cette connexion n'existe pas !") ;
                         break ;
                     }
-
-                    System.out.println("Veuillez saisir la nouvelle connexion : ");
-                    ligne = sc.nextLine() ;
                     
+                    reseau.supprimerConnexion(oldCon);
+                    oldCon.getGenerateur().supprimerConnexion(oldCon);
+                    oldCon.getMaison().setConnexion(null);
+                    creerConnexion();
 
                     break ;
                 case 3 : 
