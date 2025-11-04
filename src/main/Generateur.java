@@ -20,6 +20,14 @@ public class Generateur {
         this.maisons = new ArrayList<>() ;
     }
 
+    public void ajouterConnexion(Connexion c){
+        this.maisons.add(c) ;
+    }
+
+    public void supprimerConnexion(Connexion c){
+        this.maisons.remove(c);
+    }
+
     public String getNom(){
         return nom ;
     }
