@@ -50,11 +50,12 @@ Une fois la configuration terminée :
 ```
 src/
  ├── main/
- │    ├── Main.java
+ │    ├── MainApp.java
  │    ├── Reseau.java
  │    ├── Generateur.java
  │    ├── Maison.java
- │    └── Connexion.java
+ │    ├── Connexion.java
+ │    └── NiveauConsommation.java
  └── test/
       └── Test.java
 
