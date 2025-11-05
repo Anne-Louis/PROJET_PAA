@@ -56,6 +56,8 @@ src/
  │    ├── Maison.java
  │    ├── Connexion.java
  │    └── NiveauConsommation.java
+ ├── ressources/
+ │    └── reseau_config_test.txt
  └── test/
       └── Test.java
 
