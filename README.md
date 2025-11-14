@@ -1,10 +1,8 @@
 # Projet PAA (L3) - Réseau Électrique 
 
----
-
 ## Description du projet
 
-Ce projet a pour objectif de modéliser et simuler un **réseau électrique** simplifié composé de :
+Ce projet modélise et simule un **réseau électrique** simplifié composé de :
 
 - **Maisons** (consommateurs) avec des niveaux de consommation (basse, normale, forte).
 
@@ -12,7 +10,6 @@ Ce projet a pour objectif de modéliser et simuler un **réseau électrique** si
 
 - **Connexions** reliant chaque maison à un générateur unique.
 
----
 
 ## Objectifs du projet
 
@@ -22,7 +19,18 @@ Ce projet a pour objectif de modéliser et simuler un **réseau électrique** si
 
 - Calculer le coût d'une solution et le minimiser.
 
----
+## Point d'entrée du projet 
+
+Le fichier principal du programme se trouve dans le dossier 'src/test/'. Vous pouvez trouver le point d'entrée du programme dans le fichier 'Menu.java'.
+
+## Comment Exécuter
+
+Assurez- vous d'avoir Java installé sur votre système.
+
+1. Clonez ce dépôt.
+2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
+3. Exécutez la commande : javac -d bin src/main/*.java src/test/*.java
+4. Puis la commande : java -cp bin src/test/Test.java
 
 ## Fonctionnalités (Partie 1)
 
@@ -43,7 +51,6 @@ Une fois la configuration terminée :
 - Afficher le réseau électrique
 - Quitter le programme
 
----
 
 ## Structure du projet 
 
@@ -64,7 +71,6 @@ src/
 
 ```
 
----
 
 ## Équipe de développement
 
@@ -76,7 +82,6 @@ Projet réalisé par un groupe de 3 étudiants de L3 :
 
 - Mohammed Aali
 
----
 
 ## Extensions possibles
 
