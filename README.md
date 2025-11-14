@@ -50,16 +50,17 @@ Une fois la configuration terminée :
 ```
 src/
  ├── main/
- │    ├── MainApp.java
- │    ├── Reseau.java
- │    ├── Generateur.java
- │    ├── Maison.java
- │    ├── Connexion.java
- │    └── NiveauConsommation.java
+ │    ├── MainApp.java                    # Gestion des menus
+ │    ├── Reseau.java                     # Gestion du réseau
+ │    ├── Generateur.java                 # Gestion des générateurs
+ │    ├── Maison.java                     # Gestion des maisons
+ │    ├── Connexion.java                  # Gestion des connexions
+ │    └── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
  ├── ressources/
- │    └── reseau_config_test.txt
+ │    ├── Modelisation1.pdf               # Première modélisation avec diagramme de classes
+ │    └── reseau_config_test.txt          # Suite d'instructions pour réseau classique
  └── test/
-      └── Test.java
+      └── Test.java                       # Lancement du programme
 
 ```
 
@@ -69,11 +70,11 @@ src/
 
 Projet réalisé par un groupe de 3 étudiants de L3 :
 
-- Mohammed Aali
+- Laye Fode Keita
 
 - Anne-Louis Vojinovic
 
-- Laye Fode Keita
+- Mohammed Aali
 
 ---
 

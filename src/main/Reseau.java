@@ -119,31 +119,48 @@ public class Reseau {
     /**
      * Vérifie si le réseau est valide.
      * Le réseau est considéré comme valide si la capacité totale des générateurs
-     * est supérieure ou égale à la consommation totale des maisons.
+     * est supérieure ou égale à la consommation totale des maisons
+     * et si chaque maison est reliée à un seul et unique générateur.
      * @return true si le réseau est valide, false sinon
      */
     public boolean validerReseau(){
         double totalCapacite = 0;
         double totalConsommation = 0;
-        int nbConnexions = 0;
+        int nbConnexions;
+        List <Maison> maisonsInvalides = new ArrayList<>();
 
-        if (this.generateurs.size() == 0 || this.maisons.size() == 0)
+        if (this.generateurs.size() == 0 || this.maisons.size() == 0){
+            System.out.println("Le réseau est vide");
             return false;
-        for (Generateur gen : this.generateurs)
+        }
+        for (Generateur gen : this.generateurs){
             totalCapacite += gen.getCapacite();
+        }
         for (Maison msn : this.maisons){
             totalConsommation += msn.getConsommation();
-            for(Connexion cons : this.connexions)
+            nbConnexions = 0 ;
+            for(Connexion cons : this.connexions){
                 if (cons.getMaison().equals(msn))
                     nbConnexions++;
-            if (nbConnexions != 1) 
-                return false;   
+            }
+            if (nbConnexions != 1){ 
+                maisonsInvalides.add(msn);
+            }
         }
         
-        if (totalCapacite >= totalConsommation)
+        if (!maisonsInvalides.isEmpty()){
+            for (Maison msnI : maisonsInvalides){
+                System.out.println("La maison : " + msnI.getNom() + " n'a pas le bon nombre de connexions !");
+            }
+            return false ;
+        }
+
+        if (totalCapacite >= totalConsommation){
             return true;
-        else 
+        } else {
+            System.out.println("La consommation d'énergie dépasse la production");
             return false;
+        }
     } 
 
     /**
