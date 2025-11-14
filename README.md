@@ -6,7 +6,7 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 
 - **Maisons** (consommateurs) avec des niveaux de consommation (basse, normale, forte).
 
-- **Générateurs** (sources d’énergie) ayant une capacité maximale (en kW)?
+- **Générateurs** (sources d’énergie) ayant une capacité maximale (en kW).
 
 - **Connexions** reliant chaque maison à un générateur unique.
 
@@ -21,15 +21,15 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 
 ## Point d'entrée du projet 
 
-Le fichier principal du programme se trouve dans le dossier 'src/test/'. Vous pouvez trouver le point d'entrée du programme dans le fichier 'Menu.java'.
+Le fichier principal du programme se trouve dans le dossier `src/test/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Menu.java`.
 
 ## Comment Exécuter
 
-Assurez- vous d'avoir Java installé sur votre système.
+Assurez-vous d'avoir Java installé sur votre système.
 
 1. Clonez ce dépôt.
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande : javac -d bin src/main/*.java src/test/*.java
+3. Exécutez la commande : javac -d bin src/main/*.java src/test/Test.java
 4. Puis la commande : java -cp bin src/test/Test.java
 
 ## Fonctionnalités (Partie 1)
