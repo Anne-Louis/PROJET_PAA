@@ -1,4 +1,4 @@
-package main;
+package main.model;
 
 /** Représente les différents niveaux de consommation électrique d'une maison (en kW). */
 public enum NiveauConsommation {

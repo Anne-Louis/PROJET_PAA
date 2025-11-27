@@ -1,6 +1,12 @@
-package main;
+package main.menus;
 
 import java.util.Scanner ;
+
+import main.model.Connexion;
+import main.model.Generateur;
+import main.model.Maison;
+import main.model.NiveauConsommation;
+import main.model.Reseau;
 
 /**
  * Classe principale permettant de gérer l'application de simulation d'un réseau électrique.

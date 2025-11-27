@@ -1,6 +1,6 @@
 package test;
 
-import main.MainApp;
+import main.menus.MainApp;
 
 public class Test {
     public static void main (String[] args){

@@ -57,17 +57,37 @@ Une fois la configuration terminée :
 ```
 src/
  ├── main/
- │    ├── MainApp.java                    # Gestion des menus
- │    ├── Reseau.java                     # Gestion du réseau
- │    ├── Generateur.java                 # Gestion des générateurs
- │    ├── Maison.java                     # Gestion des maisons
- │    ├── Connexion.java                  # Gestion des connexions
- │    └── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
+ │    ├── algorithmes/
+ │    │    ├── Algo1.java                      # Algorithme d'optimisation du coût
+ │    │    ├── Algo2.java                      # Algorithme d'optimisation du coût
+ |    |    ---
+ │    ├── exceptions/
+ │    │    ├── FormatInvalideException         # Exception personnalisée mauvais format de fichier
+ │    │    ├── GenerateurManquantException     # Exception personnalisée générateur manquant
+ │    │    └── MaisonManquantException         # Exception personnalisée maison manquant
+ |    ├── io/
+ │    |    ├── ParseFile.java                  # Création d'un réseau via un fichier
+ │    |    └── FileSaver.java                  # Sauvegarde d'un réseau via un fichier
+ │    ├── menus/
+ │    │    ├── Menu1.java                      # Gestion menu pour créer manuellement le réseau
+ │    │    ├── Menu2.java                      # Gestion menu pour modifier manuellement le réseau
+ │    │    └── Menu3.java                      # Gestion menu lire un fichier et optimiser le coût
+ │    └── model/
+ │         ├── Connexion.java                  # Gestion des connexions
+ │         ├── Generateur.java                 # Gestion des générateurs
+ │         ├── Maison.java                     # Gestion des maisons
+ │         ├── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
+ │         └── Reseau.java                     # Gestion du réseau
  ├── ressources/
- │    ├── Modelisation1.pdf               # Première modélisation avec diagramme de classes
- │    └── reseau_config_test.txt          # Suite d'instructions pour réseau classique
+ │    ├── modelisations/                   
+ │    │    ├── modelisation1.pdf               # Première modélisation avec diagramme de classes
+ │    │    └── modelisation2.pdf               # Deuxième modélisation avec diagramme de classes
+ │    ├── instance1.txt                        # Fichier à lire pour créer un réseau
+ │    └── instance2.txt                        # Fichier à lire pour créer un réseau
  └── test/
-      └── Test.java                       # Lancement du programme
+      └── Test1.java                           # Test unitaire
+      └── Test2.java                           # Test unitaire
+      ...
 
 ```
 
@@ -81,14 +101,3 @@ Projet réalisé par un groupe de 3 étudiants de L3 :
 - Anne-Louis Vojinovic
 
 - Mohammed Aali
-
-
-## Extensions possibles
-
-- **Gestion d’erreurs avancée** sur les saisies utilisateur.
-
-- **Sauvegarde et chargement** d’un réseau depuis un fichier.
-
-- **Interface graphique** (JavaFX).
-
-- **Algorithmes d’optimisation** pour minimiser le coût global du réseau.
