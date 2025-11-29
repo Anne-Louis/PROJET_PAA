@@ -16,7 +16,36 @@ public enum NiveauConsommation {
         return valeur;
     }
 
-    /*public int setValeur(int valeur){
+    /**
+     * Convertit une chaîne en niveau de consommation
+     * Accepte "NORMAL" (format fichier) et "NORMALE" (format interne)
+     */
+    public static NiveauConsommation fromString(String niveau) {
+        if (niveau == null) {
+            throw new IllegalArgumentException("Le niveau de consommation ne peut pas être null");
+        }
+        switch (niveau.toUpperCase()) {
+            case "BASSE": return BASSE;
+            case "NORMALE": return NORMALE;
+            case "NORMAL": return NORMALE; // Accepte les deux formats
+            case "FORTE": return FORTE;
+            default: 
+                throw new IllegalArgumentException("Niveau de consommation invalide: " + niveau);
+        }
+    }
 
-    }*/
+    /**
+     * Retourne le nom au format utilisé dans les fichiers (NORMAL au lieu de NORMALE)
+     */
+    public String toFileFormat() {
+        switch (this) {
+            case NORMALE: return "NORMAL";
+            default: return name();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return name() + " (" + valeur + "kW)";
+    }
 }
