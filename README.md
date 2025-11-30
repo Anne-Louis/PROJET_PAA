@@ -79,11 +79,15 @@ src/
  │         ├── Menu2.java                      # Gestion menu pour modifier manuellement le réseau
  │         └── Menu3.java                      # Gestion menu lire un fichier et optimiser le coût
  ├── ressources/
+ │    ├── configurations                       
+ |    |    ├── instance1.txt                   # Fichier à lire pour créer un réseau
+ │    │    └── instance2.txt                   # Fichier à lire pour créer un réseau
  │    ├── modelisations/                   
  │    │    ├── modelisation1.pdf               # Première modélisation avec diagramme de classes
  │    │    └── modelisation2.pdf               # Deuxième modélisation avec diagramme de classes
- │    ├── instance1.txt                        # Fichier à lire pour créer un réseau
- │    └── instance2.txt                        # Fichier à lire pour créer un réseau
+ │    └── solutions
+ |         ├── solution1.txt                   # Fichier contenant une solution
+ │         └── solution2.txt                   # Fichier contenant une solution           
  └── test/
       └── Test1.java                           # Test unitaire
       └── Test2.java                           # Test unitaire

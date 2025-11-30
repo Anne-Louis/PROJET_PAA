@@ -8,6 +8,7 @@ import main.components.Generateur;
 import main.components.Maison;
 import main.components.NiveauConsommation;
 import main.components.Reseau;
+import main.io.SauvegardeReseau;
 
 /**
  * Classe utilitaire contenant les méthodes pour les différents menus
@@ -72,6 +73,8 @@ public class UtilMenu {
     /**
      * Permet à l'utilisateur de créer un générateur.
      * Si un générateur du même nom existe déjà, sa capacité est mise à jour.
+     * @param reseau le reseau sur lequel on va créer le générateur
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerGenerateur(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir le générateur à enregistrer ainsi que sa puissance (ex : G1 60) : ";
@@ -94,6 +97,8 @@ public class UtilMenu {
     /**
      * Permet à l'utilisateur de créer une maison.
      * Si une maison du même nom existe déjà, sa consommation est mise à jour.
+     * @param reseau le reseau sur lequel on va créer la maison
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerMaison(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) : ";
@@ -116,6 +121,8 @@ public class UtilMenu {
     /**
      * Permet de construire une connexion à partir d'un générateur et d'une maison
      * rentrés à l'écrit par l'utilisateur
+     * @param reseau le reseau sur lequel on va enregistrer la connexion
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      * @param message le message à envoyer à l'utilisateur
      * @return connexion la connexion construite à partir du générateur et de la maison
      */
@@ -163,6 +170,8 @@ public class UtilMenu {
     /**
      * Permet à l'utilisateur de créer une connexion entre un générateur et une maison existants.
      * La méthode vérifie l'existence des deux objets et empêche la création de doublons.
+     * @param reseau le reseau sur lequel on va créer la connexion
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerConnexion(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir la connexion à enregistrer  (ex : G1 M1 ou M1 G1) : " ;
@@ -184,7 +193,9 @@ public class UtilMenu {
     }
 
     /**
-     * Permet à l'utilisateur de supprimer une connexion existante.
+     * Permet à l'utilisateur de supprimer une connexion existante.     
+     * @param reseau le reseau sur lequel on va supprimer la connexion
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static boolean supprimerConnexion(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir la connexion que vous souhaitez modifier : " ;
@@ -201,13 +212,29 @@ public class UtilMenu {
         return true ;
     }
 
-    /*
+    /**
      * Permet à l'utilisateur de modifier une connexion existante.
      * La connexion est supprimée puis une nouvelle est créée.
+     * @param reseau le reseau sur lequel on va modifier la connexion
+     * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void modifierConnexion(Reseau reseau, Scanner sc){
         if (supprimerConnexion(reseau, sc)){
             creerConnexion(reseau, sc);
         }
+    }
+
+    /**
+     * Permet à l'utilisateur de sauvegarder la solution d'un réseau
+     * dans un fichier de son choix.
+     * Si le fichier existe déjà, il est remplacé sinon un nouveau est crée.
+     * @param reseau
+     * @param sc
+     */
+    public static void sauvegardeSolution(Reseau reseau, Scanner sc){
+        System.out.println("Votre fichier sera sauvegardé dans le dossier : src/ressources/solutions/");
+        String fichier = lireStringAuClavier(sc, "Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
+        fichier = "src/ressources/solutions/" + fichier ;
+        SauvegardeReseau.sauvegardeReseau(reseau, fichier);
     }
 }

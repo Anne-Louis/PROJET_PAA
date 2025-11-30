@@ -1,3 +1,0 @@
-generateur(G1,60.0).
-maison(M1,NORMAL).
-connexion(G1,M1).

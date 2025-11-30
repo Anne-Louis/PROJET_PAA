@@ -4,15 +4,16 @@ import java.util.Scanner;
 import main.components.Reseau;
 
 /**
- * Menu principal de création du réseau (option 1).
+ * Menu principal de création du réseau (menu 1).
  * Permet de :
  * <ul>
  *   <li>Créer un générateur,</li>
  *   <li>Créer une maison,</li>
- *   <li>Créer une connexion.</li>
+ *   <li>Créer une connexion,</li>
+ *   <li>Supprimer une connexion.</li>
  * </ul>
  * Le programme passe au menu suivant une fois que le réseau est validé
- * lorsque l'utilisateur choisit l'option 4.
+ * lorsque l'utilisateur choisit l'option 5.
  */
 public class Menu1 {
     /** Réseau électrique géré par l'application. */

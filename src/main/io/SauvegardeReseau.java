@@ -10,7 +10,15 @@ import main.components.Generateur;
 import main.components.Maison;
 import main.components.Reseau;
 
+/**
+ * Classe de sauvegarde dans un fichier sous le format demandé
+ * de la solution d'un réseau trouvé par un algorithme.
+ */
 public class SauvegardeReseau {
+    /**
+     * @param reseau le reseau à sauvegarder
+     * @param fichier le nom du fichier dans lequel on va sauvegarder la solution
+     */
     public static void sauvegardeReseau(Reseau reseau, String fichier){
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fichier)))) {
             for (Generateur gen : reseau.getGenerateurs()){
