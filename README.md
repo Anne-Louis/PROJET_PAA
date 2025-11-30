@@ -61,6 +61,12 @@ src/
  │    │    ├── Algo1.java                      # Algorithme d'optimisation du coût
  │    │    ├── Algo2.java                      # Algorithme d'optimisation du coût
  |    |    ---
+ │    ├── components/
+ │    |    ├── Connexion.java                  # Gestion des connexions
+ │    |    ├── Generateur.java                 # Gestion des générateurs
+ │    |    ├── Maison.java                     # Gestion des maisons
+ │    |    ├── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
+ │    |    └── Reseau.java                     # Gestion du réseau
  │    ├── exceptions/
  │    │    ├── FormatInvalideException         # Exception personnalisée mauvais format de fichier
  │    │    ├── GenerateurManquantException     # Exception personnalisée générateur manquant
@@ -68,16 +74,10 @@ src/
  |    ├── io/
  │    |    ├── ParseFile.java                  # Création d'un réseau via un fichier
  │    |    └── FileSaver.java                  # Sauvegarde d'un réseau via un fichier
- │    ├── menus/
- │    │    ├── Menu1.java                      # Gestion menu pour créer manuellement le réseau
- │    │    ├── Menu2.java                      # Gestion menu pour modifier manuellement le réseau
- │    │    └── Menu3.java                      # Gestion menu lire un fichier et optimiser le coût
- │    └── model/
- │         ├── Connexion.java                  # Gestion des connexions
- │         ├── Generateur.java                 # Gestion des générateurs
- │         ├── Maison.java                     # Gestion des maisons
- │         ├── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
- │         └── Reseau.java                     # Gestion du réseau
+ │    └── menus/
+ │         ├── Menu1.java                      # Gestion menu pour créer manuellement le réseau
+ │         ├── Menu2.java                      # Gestion menu pour modifier manuellement le réseau
+ │         └── Menu3.java                      # Gestion menu lire un fichier et optimiser le coût
  ├── ressources/
  │    ├── modelisations/                   
  │    │    ├── modelisation1.pdf               # Première modélisation avec diagramme de classes

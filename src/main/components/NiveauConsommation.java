@@ -1,4 +1,4 @@
-package main.model;
+package main.components;
 
 /** Représente les différents niveaux de consommation électrique d'une maison (en kW). */
 public enum NiveauConsommation {
@@ -6,7 +6,7 @@ public enum NiveauConsommation {
     BASSE(10),
 
     /** Maison à consommation normale : 20 kW. */
-    NORMALE(20),
+    NORMAL(20),
 
     /** Maison à forte consommation : 40 kW. */
     FORTE(40);
