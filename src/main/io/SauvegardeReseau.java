@@ -1,14 +1,9 @@
 package main.io;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
 
-import main.components.Connexion;
-import main.components.Generateur;
-import main.components.Maison;
-import main.components.Reseau;
+import main.components.*;
 
 /**
  * Classe de sauvegarde dans un fichier sous le format demandé
@@ -19,7 +14,11 @@ public class SauvegardeReseau {
      * @param reseau le reseau à sauvegarder
      * @param fichier le nom du fichier dans lequel on va sauvegarder la solution
      */
-    public static void sauvegardeReseau(Reseau reseau, String fichier){
+    public static void sauvegardeReseau(Reseau reseau, String fichier) throws FileAlreadyExistsException{
+        if (fichierExiste(fichier + ".txt")){
+            throw new FileAlreadyExistsException("Un fichier contenant une configuration de réseau porte déjà ce nom !");
+        }
+        fichier = "src/ressources/solutions/" + fichier ;
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fichier)))) {
             for (Generateur gen : reseau.getGenerateurs()){
                 pw.println("generateur(" + gen.getNom() + "," + gen.getCapacite() + ").");
@@ -34,5 +33,26 @@ public class SauvegardeReseau {
             System.err.println("Erreur lors de la sauvegarde de fichier : " + e);
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Vérifie si un fichier avec le même nom existe déjà
+     * @param fichier le nom de fichier qu'on veut comparer
+     * @return true si le fichier existe déjà, false sinon
+     */
+    private static boolean fichierExiste(String fichier) {
+        File dir = new File("src/ressources/configurations/");
+        File[] list = dir.listFiles();
+
+        if (list == null){
+            return false ;
+        }
+
+        for (File f : list) {
+            if (f.getName().equals(fichier)) {
+                return true ;
+            }
+        }
+        return false ;
     }
 }

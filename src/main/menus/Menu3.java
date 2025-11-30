@@ -40,6 +40,7 @@ public class Menu3 {
                 case 3 :
                     fin = true ;
                     System.out.println("Merci d'avoir utilisé ce programme !!!") ;
+                    break ;
                 default :
                     System.out.println("Ce n'est pas un choix valide !");
             }

@@ -58,6 +58,7 @@ public class Menu1 {
                     }
                     fin = true ;
                     Menu2.menu2(reseau, sc) ;
+                    break ;
                 default :
                     System.out.println("Ce n'est pas un choix valide !");
             }
