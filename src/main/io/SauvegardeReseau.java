@@ -41,14 +41,14 @@ public class SauvegardeReseau {
      * @return true si le fichier existe déjà, false sinon
      */
     private static boolean fichierExiste(String fichier) {
-        File dir = new File("src/ressources/configurations/");
-        File[] list = dir.listFiles();
+        File dossier = new File("src/ressources/configurations/");
+        File[] liste = dossier.listFiles();
 
-        if (list == null){
+        if (liste == null){
             return false ;
         }
 
-        for (File f : list) {
+        for (File f : liste) {
             if (f.getName().equals(fichier)) {
                 return true ;
             }
