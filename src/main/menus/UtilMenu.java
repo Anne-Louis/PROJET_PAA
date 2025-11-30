@@ -1,5 +1,6 @@
 package main.menus;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -233,8 +234,16 @@ public class UtilMenu {
      */
     public static void sauvegardeSolution(Reseau reseau, Scanner sc){
         System.out.println("Votre fichier sera sauvegardé dans le dossier : src/ressources/solutions/");
-        String fichier = lireStringAuClavier(sc, "Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
-        fichier = "src/ressources/solutions/" + fichier ;
-        SauvegardeReseau.sauvegardeReseau(reseau, fichier);
+
+        boolean fichierSauvegarder = false ;
+        while(!fichierSauvegarder){
+            try {
+                String fichier = lireStringAuClavier(sc, "Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
+                SauvegardeReseau.sauvegardeReseau(reseau, fichier);
+                fichierSauvegarder = true ;
+            } catch (FileAlreadyExistsException e) {
+                System.out.println(e);
+            }
+        }
     }
 }
