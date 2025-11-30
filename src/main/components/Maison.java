@@ -1,4 +1,4 @@
-package main.model;
+package main.components;
 
 /**
  * Représente une maison dans le réseau.
