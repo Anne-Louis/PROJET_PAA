@@ -4,7 +4,7 @@ import java.util.Scanner;
 import main.components.Reseau;
 
 /**
- * Menu secondaire d'utilisation du réseau (option 2).
+ * Menu secondaire d'utilisation du réseau (menu 2).
  * Permet de :
  * <ul>
  *   <li>Calculer le coût du réseau électrique actuel,</li>
@@ -14,6 +14,10 @@ import main.components.Reseau;
  * Le programme se termine lorsque l'utilisateur choisit l'option 4.
  */
 public class Menu2 {
+    /**
+     * @param reseau le reseau sur lequel on va appliquer les modifications ainsi que le calcul du coût
+     * @param sc le scanner pour enregistrer les choix de l'utilisateur
+     */
     public static void menu2(Reseau reseau, Scanner sc){
         boolean fin = false ;
 

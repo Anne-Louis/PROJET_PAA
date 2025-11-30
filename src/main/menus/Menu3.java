@@ -2,9 +2,21 @@ package main.menus;
 
 import java.util.Scanner;
 import main.components.Reseau;
-import main.io.SauvegardeReseau;
 
+/**
+ * Menu tertiaire d'optimisation du réseau (menu 3).
+ * Permet de :
+ * <ul>
+ *   <li>Trouver une solution plus performante pour le réseau,</li>
+ *   <li>Sauvegarder la solution actuelle du réseau.</li>
+ * </ul>
+ * Le programme se termine lorsque l'utilisateur choisit l'option 3.
+ */
 public class Menu3 {
+    /**
+     * @param reseau le reseau qu'on va chercher à optimiser puis sauvegarder sa solution
+     * @param sc le scanner pour enregistrer les choix de l'utilisateur
+     */
     public static void menu3(Reseau reseau, Scanner sc){
         boolean fin = false ;
 
@@ -23,7 +35,7 @@ public class Menu3 {
                 case 1 :
                     break ;
                 case 2 :
-                    SauvegardeReseau.sauvegardeReseau(reseau, "src/ressources/test.txt");
+                    UtilMenu.sauvegardeSolution(reseau, sc);
                     break ;
                 case 3 :
                     fin = true ;
