@@ -2,6 +2,7 @@ package main.menus;
 
 import java.util.Scanner;
 import main.components.Reseau;
+import main.algorithmes.*;
 
 /**
  * Menu tertiaire d'optimisation du réseau (menu 3).
@@ -33,6 +34,7 @@ public class Menu3 {
 
             switch(nb){
                 case 1 :
+                    Algorithme1.resoudreReseau(reseau, Algorithme1.epsilonInit );
                     break ;
                 case 2 :
                     UtilMenu.sauvegardeSolution(reseau, sc);
