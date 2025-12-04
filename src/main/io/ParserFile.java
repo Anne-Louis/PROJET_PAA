@@ -15,7 +15,7 @@ public class ParserFile {
     int n = Integer.parseInt(sc.nextLine());
 
     String fileName =
-        "C:/Users/noumo/Desktop/projet_2/PROJET_PAA/src/ressources/configurations/instance"
+        "src/ressources/configurations/instance"
         + n + ".txt";
     
     File file = new File(fileName);
@@ -80,5 +80,6 @@ public class ParserFile {
     return reseau;
     
 }
+
 
 }
