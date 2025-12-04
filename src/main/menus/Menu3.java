@@ -39,7 +39,7 @@ public class Menu3 {
 
             switch(nb){
                 case 0:
-                    reseau = ParserFile.readReseau();
+                    reseau = ParserFile.readReseau(sc);
                     break;
                 case 1 :
                     Algorithme1.resoudreReseau(reseau, Algorithme1.epsilonInit);
