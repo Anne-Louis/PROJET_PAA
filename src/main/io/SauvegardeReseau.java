@@ -15,7 +15,8 @@ public class SauvegardeReseau {
      * @param fichier le nom du fichier dans lequel on va sauvegarder la solution
      */
     public static void sauvegardeReseau(Reseau reseau, String fichier) throws FileAlreadyExistsException{
-        if (fichierExiste(fichier + ".txt")){
+        fichier = fichier + ".txt";
+        if (fichierExiste(fichier)){
             throw new FileAlreadyExistsException("Un fichier contenant une configuration de réseau porte déjà ce nom !");
         }
         fichier = "src/ressources/solutions/" + fichier ;

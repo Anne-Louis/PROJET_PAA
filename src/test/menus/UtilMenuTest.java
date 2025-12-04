@@ -5,6 +5,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -122,8 +127,42 @@ public class UtilMenuTest {
     }
 
     @Test
-    void creerEtSupprimerConnexion(){
+    void creerEtSupprimerConnexionTest(){
         sc = new Scanner("gen1 maison1");
         
     }
+
+    @Test
+    void sauvegarderSolutionTest() throws FileAlreadyExistsException, IOException{
+        sc = new Scanner("test");
+        UtilMenu.sauvegardeSolution(reseau, sc);
+
+        boolean existe = false ;
+        File dossier = new File("src/ressources/solutions/");
+        File[] liste = dossier.listFiles();
+        if (liste == null){
+            existe = false ;
+        }
+        for (File f : liste) {
+            if (f.getName().equals("test")) {
+                existe = true ;
+            }
+        }
+
+        assertTrue(existe);
+        Files.deleteIfExists(Path.of("src/ressources/solutions/test"));
+    }
+
+    /*@Test
+    void sauvegarderFichierNomDejaExistant() throws IOException{
+        //Path cheminExistant = Path.of("src/ressources/configurations/simple1.txt");
+        //Files.createFile(cheminExistant);
+
+        Scanner sc = new Scanner("simple\ntest\n");
+
+        assertThrows(FileAlreadyExistsException.class,
+            () -> UtilMenu.sauvegardeSolution(reseau, sc));
+
+        //Files.deleteIfExists(cheminExistant);
+    }*/
 }
