@@ -1,6 +1,8 @@
 package main.components;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Représente un réseau électrique composé de générateurs, de maisons et de connexions.
@@ -51,9 +53,9 @@ public class Reseau {
      * @param r le réseau à copier
      */
     public Reseau(Reseau r){
-        this.generateurs = r.getGenerateurs();
-        this.maisons = r.getMaisons();
-        this.connexions = r.getConnexions();
+        this.generateurs = new ArrayList<>(r.getGenerateurs());
+        this.maisons = new ArrayList<>(r.getMaisons());
+        this.connexions = new ArrayList<>(r.getConnexions());
         this.lampda = r.lampda;
         this.totalCout = r.totalCout;
     }
@@ -97,7 +99,7 @@ public class Reseau {
             dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
             surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
         }
-        this.totalCout = (Math.round(((surchargeReseau * lampda) + dispertionReseau)*1000.0))/1000.0;
+        this.totalCout = ((surchargeReseau * lampda) + dispertionReseau);
         
         return this.totalCout;
     }
@@ -251,5 +253,41 @@ public class Reseau {
      */
     public void setGenerateurs(List<Generateur> gens){
         this.generateurs = gens;
+    }
+
+    /**
+     * Creer une copie profonde de l'instance reseau appelant
+     * @return copie de l'instance this.
+     */
+    public Reseau copierReseau() {
+        Reseau copy = new Reseau();
+
+        Map<Generateur, Generateur> mapGen = new HashMap<>();
+        Map<Maison, Maison> mapMaison = new HashMap<>();
+
+        for (Generateur g : this.generateurs) {
+            Generateur ng = new Generateur(g.getNom(), g.getCapacite());
+            mapGen.put(g, ng);
+            copy.ajouterGenerateur(ng);
+        }
+
+        for (Maison m : this.maisons) {
+            Maison nm = new Maison(m.getNom(), m.getNiveau());
+            mapMaison.put(m, nm);
+            copy.ajouterMaison(nm);
+        }
+
+        for (Connexion c : this.connexions) {
+            Connexion nc=new  Connexion(mapGen.get(c.getGenerateur()), mapMaison.get(c.getMaison()));
+            copy.ajouterConnexion(nc);
+
+            mapGen.get(c.getGenerateur()).ajouterConnexion(nc);
+            mapMaison.get(c.getMaison()).setConnexion(nc);
+        }
+
+        copy.lampda = this.lampda;
+        copy.totalCout = copy.calculerCoutReseau();
+
+        return copy;
     }
 }
