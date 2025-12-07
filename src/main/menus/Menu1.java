@@ -2,6 +2,7 @@ package main.menus;
 
 import java.util.Scanner;
 import main.components.Reseau;
+import main.exceptions.InvalideReseauException;
 
 /**
  * Menu principal de création du réseau (menu 1).
@@ -52,9 +53,12 @@ public class Menu1 {
                     UtilMenu.supprimerConnexion(reseau, sc);
                     break ;
                 case 5 :
-                    if (!reseau.validerReseau()){
-                        System.out.println("Le réseau n'est pas valide");
+                    try{
+                        if (!reseau.validerReseau()){
                         break ;
+                        }
+                    }catch(InvalideReseauException e){
+                        System.out.println(e.getMessage());
                     }
                     fin = true ;
                     Menu2.menu2(reseau, sc) ;
