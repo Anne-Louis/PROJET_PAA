@@ -1,10 +1,14 @@
 package main.algorithmes;
 
+import main.components.*;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Algorithme1 {
     /**
      * @param epsilonInit la tolerance d'équilibrage de la repartion des charges entre les générateurs.
      */
-    public static double epsilonInit = 0.5;
+    public static double epsilonInit = 0.8;
     /**
      * Alloue les maisons au générateurs par :
      * par tri des maisons par ordres decroisante de consommation.
@@ -16,13 +20,10 @@ public class Algorithme1 {
      */
 
     public static void resoudreReseau(Reseau S, double epsilon) {
-        double meilleurCout = S.calculerCoutReseau();
         int maxIter = S.getGenerateurs().size() / 2;
         int iter = 0;
 
         do {
-            double coutAvant = S.calculerCoutReseau();
-
             List<Maison> maisons = new ArrayList<>(S.getMaisons());
             List<Generateur> generateurs = new ArrayList<>(S.getGenerateurs());
 
@@ -30,25 +31,19 @@ public class Algorithme1 {
                 g.getMaisons().clear();
             }
 
-            maisons.sort((m1, m2) ->
-                Double.compare(m2.getConsommation(), m1.getConsommation())
+            maisons.sort((m1, m2) -> Double.compare(m2.getConsommation(), m1.getConsommation())
             );
 
             for (Maison m : maisons) {
-                double moyenneTaux =
-                    calculerMoyenneTauxUtilisation(generateurs);
-
-                List<Generateur> sortedG =
-                    getGenerateursParCapaciteDisponibleDecroissant(generateurs);
+                double moyenneTaux = calculerMoyenneTauxUtilisation(generateurs);
+                List<Generateur> sortedG = getGenerateursParCapaciteDisponibleDecroissant(generateurs);
 
                 boolean alloue = false;
 
                 for (Generateur g : sortedG) {
-                    double capaciteRestante =
-                        g.getCapacite() - g.calculCharge();
+                    double capaciteRestante = g.getCapacite() - g.calculCharge();
                     if (capaciteRestante >= m.getConsommation() &&
-                        Math.abs(g.calculTauxUtilisation() - moyenneTaux)
-                            <= epsilon) {
+                        Math.abs(g.calculTauxUtilisation() - moyenneTaux) <= epsilon) {
                         g.ajouterConnexion(new Connexion(g, m));
                         alloue = true;
                         break;
@@ -58,8 +53,7 @@ public class Algorithme1 {
                 // si aucun generateur ne respecte la regulation:
                 if (!alloue) {
                     for (Generateur g : sortedG) {
-                        double capaciteRestante =
-                            g.getCapacite() - g.calculCharge();
+                        double capaciteRestante = g.getCapacite() - g.calculCharge();
                         if (capaciteRestante >= m.getConsommation()) {
                             g.ajouterConnexion(new Connexion(g, m));
                             break;
@@ -68,14 +62,9 @@ public class Algorithme1 {
                 }
             }
 
-            double coutApres = S.calculerCoutReseau();
-            meilleurCout = Math.min(meilleurCout, coutApres);
-
+            System.out.println("le cout du reseau actuel:"+ S.calculerCoutReseau());
             epsilon = Math.max(epsilon * 0.99, 1e-3);
             iter++;
-
-            if (Math.abs(coutAvant - coutApres) < 1e-6)
-                break;
 
         } while (iter < maxIter);
     }

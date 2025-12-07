@@ -1,36 +1,36 @@
-Input: 
-    M = liste des maisons
-    G = liste des générateurs
+    Input: 
+        M = liste des maisons
+        G = liste des générateurs
 
-Output: 
-    R = réseau avec connexions allouées
+    Output: 
+        R = réseau avec connexions allouées
 
-Algorithme:
+    Algorithme:
 
-1. Supprimer toutes les connexions initiales des generateurs
+    1. Supprimer toutes les connexions initiales des generateurs
 
-2. Trier les maisons M par consommation décroissante
+    2. Trier les maisons M par consommation décroissante
 
-3. Pour chaque maison m dans M:
-    
-    a. Calculer la moyenne des taux actuels des générateurs :
-       MoyenneTaux = (1 / |G|) * somme( Taux(g) pour g in G )
+    3. Pour chaque maison m dans M:
+        
+        a. Calculer la moyenne des taux actuels des générateurs :
+        MoyenneTaux = (1 / |G|) * somme( Taux(g) pour g in G )
 
-    b. Créer une liste des générateurs triée par capacité disponible décroissante
+        b. Créer une liste des générateurs triée par capacité disponible décroissante
 
-    c. Pour chaque générateur g dans cette liste:
+        c. Pour chaque générateur g dans cette liste:
 
-        i. Si g peut alimenter m (capacité restante >= consommation de m) 
-           ET |Taux(g) - MoyenneTaux| <= ε  (règle de régulation)
-               Alors:
-                   - Allouer la maison m au générateur g
-                   - Mettre à jour les taux
-                   - Sortir de la boucle sur les générateurs
+            i. Si g peut alimenter m (capacité restante >= consommation de m) 
+            ET |Taux(g) - MoyenneTaux| <= ε  (règle de régulation)
+                Alors:
+                    - Allouer la maison m au générateur g
+                    - Mettre à jour les taux
+                    - Sortir de la boucle sur les générateurs
 
-    d. Si aucune allocation possible selon la règle:
-           - Ignorer la règle de régulation (ε) et allouer au générateur de plus grande capacité restante disponible
+        d. Si aucune allocation possible selon la règle:
+            - Ignorer la règle de régulation (ε) et allouer au générateur de plus grande capacité restante disponible
 
-4. Fin pour
+    4. Fin pour
 
-5. Retourner le réseau avec les nouvelles connexions
+    5. Retourner le réseau avec les nouvelles connexions
 

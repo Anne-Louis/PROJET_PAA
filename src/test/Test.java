@@ -17,10 +17,10 @@ public class Test {
         generateurs.add(gen2); 
         generateurs.add(gen3); 
 
-        Maison msn1 = new Maison("maison1",NiveauConsommation.NORMAL);
+        Maison msn1 = new Maison("maison1",NiveauConsommation.NORMALE);
         Maison msn2 = new Maison("maison2",NiveauConsommation.BASSE);
         Maison msn3 = new Maison("maison3",NiveauConsommation.FORTE);
-        Maison msn4 = new Maison("maison4",NiveauConsommation.NORMAL);
+        Maison msn4 = new Maison("maison4",NiveauConsommation.NORMALE);
         List <Maison> maisons = new ArrayList<>();
         maisons.add(msn1);
         maisons.add(msn2);

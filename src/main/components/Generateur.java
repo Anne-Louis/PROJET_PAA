@@ -40,6 +40,18 @@ public class Generateur {
     }
 
     /**
+     * Creer une copie du générateur g;
+     * @param g le générateur copié
+     */
+
+    public Generateur(Generateur g) {
+        this.nom = g.nom;
+        this.capacite = g.capacite;
+        this.maisons = new ArrayList<>();
+    }
+
+
+    /**
      * Ajoute une connexion au générateur.
      * @param c la connexion à ajouter
      */

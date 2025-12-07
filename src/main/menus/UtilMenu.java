@@ -54,7 +54,7 @@ public class UtilMenu {
 	 * @param message le message affiche à l'utilisateur pour demander la chaîne de caractère
 	 * @return la chaîne de caractère lue
 	 */
-	private static String lireStringAuClavier(Scanner sc, String message) {
+	public static String lireStringAuClavier(Scanner sc, String message) {
 		String res = "";
 		boolean lectureOK = false;
 
