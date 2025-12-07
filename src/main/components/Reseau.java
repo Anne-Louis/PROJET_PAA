@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import main.exceptions.InvalideReseauException;
+
 /**
  * Représente un réseau électrique composé de générateurs, de maisons et de connexions.
  * Cette classe permet de construire, valider et analyser un réseau électrique.
@@ -125,15 +127,14 @@ public class Reseau {
      * et si chaque maison est reliée à un seul et unique générateur.
      * @return true si le réseau est valide, false sinon
      */
-    public boolean validerReseau(){
+    public boolean validerReseau() throws InvalideReseauException {
         double totalCapacite = 0;
         double totalConsommation = 0;
         int nbConnexions;
         List <Maison> maisonsInvalides = new ArrayList<>();
 
         if (this.generateurs.size() == 0 || this.maisons.size() == 0){
-            System.out.println("Le réseau est vide");
-            return false;
+            throw new InvalideReseauException("Le réseau est vide");
         }
         for (Generateur gen : this.generateurs){
             totalCapacite += gen.getCapacite();
@@ -154,14 +155,13 @@ public class Reseau {
             for (Maison msnI : maisonsInvalides){
                 System.out.println("La maison : " + msnI.getNom() + " n'a pas le bon nombre de connexions !");
             }
-            return false ;
+            throw new InvalideReseauException("maison(s) connectée(s) à plusieur génerateur");
         }
 
         if (totalCapacite >= totalConsommation){
             return true;
         } else {
-            System.out.println("La consommation d'énergie dépasse la production");
-            return false;
+            throw new  InvalideReseauException("La consommation d'énergie dépasse la production");
         }
     } 
 
@@ -193,8 +193,10 @@ public class Reseau {
      * @return true si l’ajout a réussi, false sinon
      */
     public boolean ajouterConnexion(Connexion conn){
-        if (conn == null)
+        if (conn == null || this.connexions.contains(conn))
             return false;
+        conn.getGenerateur().ajouterConnexion(conn);
+        conn.getMaison().setConnexion(conn);
         return this.connexions.add(conn);
     }
 
@@ -281,13 +283,70 @@ public class Reseau {
             Connexion nc=new  Connexion(mapGen.get(c.getGenerateur()), mapMaison.get(c.getMaison()));
             copy.ajouterConnexion(nc);
 
-            mapGen.get(c.getGenerateur()).ajouterConnexion(nc);
-            mapMaison.get(c.getMaison()).setConnexion(nc);
+            //mapGen.get(c.getGenerateur()).ajouterConnexion(nc);
+            //mapMaison.get(c.getMaison()).setConnexion(nc);
         }
 
         copy.lampda = this.lampda;
-        copy.totalCout = copy.calculerCoutReseau();
+        copy.totalCout = this.calculerCoutReseau();
 
         return copy;
+    }
+
+    /**
+     * Methode de recherche d'une instance maison par son
+     * @param nom le nom de la maison
+     * @return retourne l'instance maison s'elle existe ou null sinon.
+     */
+    public Maison trouverMaisonParNom(String nom) {
+        for (Maison maison : maisons) {
+            if (maison.getNom().equals(nom)) {
+                return maison;
+            }
+        }
+        return null;
+    }
+    /**
+     * Méthoode de recherche d'une instance générateur par son nom;
+     * @param nom le nom String du Generateur 
+     * @return retourne l'instance générateur s'elle existe ou null sinon.
+     */
+    
+    public Generateur trouverGenerateurParNom(String nom) {
+        for (Generateur generateur : generateurs) {
+            if (generateur.getNom().equals(nom)) {
+                return generateur;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * Methode de recherche d'une instance par les noms de la maison et du générateur
+     * @param nomMaison     nom de l'insatnce maison de la connexion.
+     * @param nomGenerateur nom de l'instance Générateur de la connexion.
+     * @return retourne l'instance connexion s'elle existe ou null sinon.
+     */
+    public Connexion trouverConnexion(String nomMaison, String nomGenerateur) {
+        for (Connexion connexion : connexions) {
+            if (connexion.getMaison().getNom().equals(nomMaison) && 
+                connexion.getGenerateur().getNom().equals(nomGenerateur)) {
+                return connexion;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Méthode pour connecter une maison à un générateur à partir de leur nom
+     */
+    public void connecterMaisonGenerateur(String nomMaison, String nomGenerateur) {
+        Maison maison = trouverMaisonParNom(nomMaison);
+        Generateur generateur = trouverGenerateurParNom(nomGenerateur);
+        
+        if (maison != null && generateur != null) {
+            Connexion nouvelleConnexion = new Connexion(generateur, maison);
+            ajouterConnexion(nouvelleConnexion);
+        }
     }
 }
