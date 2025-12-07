@@ -2,8 +2,9 @@ package main.menus;
 
 import java.util.Scanner;
 import main.components.Reseau;
+import main.exceptions.*;
 import main.algorithmes.*;
-import main.io.ParserFile;
+import main.io.ParseFile;
 
 /**
  * Menu tertiaire d'optimisation du réseau (menu 3).
@@ -39,7 +40,18 @@ public class Menu3 {
 
             switch(nb){
                 case 0:
-                    reseau = ParserFile.readReseau(sc);
+                    String filePath = "./src/ressources/configurations/instance" + UtilMenu.lireEntierAuClavier(sc, "Entrez le numéro de l'instance à charger (ex: 1) :  ") + ".txt";
+                    try{
+                        reseau = ParseFile.importerReseau(filePath);
+                        reseau.validerReseau();
+                    } catch(ImportException e){
+                        System.out.println(e.getMessage() + "\n" + e.getCause());
+                    }catch(InvalideReseauException e){
+                        System.out.println("Le reseau est invalid\n"+ e.getMessage());
+                    }
+                    finally{
+                        fin = true;
+                    }
                     break;
                 case 1 :
                     Algorithme1.resoudreReseau(reseau, Algorithme1.epsilonInit);
