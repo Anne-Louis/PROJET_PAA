@@ -10,7 +10,7 @@ import main.menus.*;
 public class Test {
     public static void main (String[] args){
         //instance1
-        Generateur gen1 = new Generateur("gen1", 60);
+        /*Generateur gen1 = new Generateur("gen1", 60);
         Generateur gen2 = new Generateur("gen2", 45);
         Generateur gen3 = new Generateur("gen3", 20);
         Generateur gen4 = new Generateur("gen4", 42);
@@ -89,6 +89,8 @@ public class Test {
         System.out.println(reseau);
         System.out.println(reseau.calculerCoutReseau());
         
+        Scanner sc = new Scanner(System.in);*/
+        Reseau reseau = new Reseau() ;
         Scanner sc = new Scanner(System.in);
         Menu3.menu3(reseau, sc);
     }
