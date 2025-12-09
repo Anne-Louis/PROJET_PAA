@@ -49,9 +49,6 @@ public class Menu3 {
                     }catch(InvalideReseauException e){
                         System.out.println("Le reseau est invalid\n"+ e.getMessage());
                     }
-                    finally{
-                        fin = true;
-                    }
                     break;
                 case 1 :
                     Algorithme1.resoudreReseau(reseau, Algorithme1.epsilonInit);
