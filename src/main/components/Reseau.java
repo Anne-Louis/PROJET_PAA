@@ -24,7 +24,7 @@ public class Reseau {
     /** Facteur de séverité de pénalisation utilisé pour le calcul du coût du réseau. 
      * Pour la première partie du projet, il sera fixé arbitrairement à 10.
      */
-    private int lampda;
+    private int lambda;
 
     /** Coût total du réseau. */
     private double totalCout;
@@ -34,7 +34,7 @@ public class Reseau {
         generateurs = new ArrayList<Generateur>();
         maisons = new ArrayList<Maison>();
         connexions = new ArrayList<Connexion>();
-        lampda = 10; totalCout = 1.0;
+        lambda = 10; totalCout = 1.0;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Reseau {
         this.generateurs = gens;
         this.maisons = msns;
         this.connexions = conns;
-        lampda = 10;totalCout = 0.0;
+        lambda = 10;totalCout = 0.0;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Reseau {
         this.generateurs = new ArrayList<>(r.getGenerateurs());
         this.maisons = new ArrayList<>(r.getMaisons());
         this.connexions = new ArrayList<>(r.getConnexions());
-        this.lampda = r.lampda;
+        this.lambda = r.lambda;
         this.totalCout = r.totalCout;
     }
     
@@ -101,7 +101,7 @@ public class Reseau {
             dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
             surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
         }
-        this.totalCout = ((surchargeReseau * lampda) + dispertionReseau);
+        this.totalCout = ((surchargeReseau * lambda) + dispertionReseau);
         
         return this.totalCout;
     }
@@ -155,7 +155,7 @@ public class Reseau {
             for (Maison msnI : maisonsInvalides){
                 System.out.println("La maison : " + msnI.getNom() + " n'a pas le bon nombre de connexions !");
             }
-            throw new InvalideReseauException("maison(s) connectée(s) à plusieur génerateur");
+            throw new InvalideReseauException("maison(s) connectée(s) à aucun ou plusieurs génerateurs");
         }
 
         if (totalCapacite >= totalConsommation){
@@ -197,7 +197,21 @@ public class Reseau {
             return false;
         conn.getGenerateur().ajouterConnexion(conn);
         conn.getMaison().setConnexion(conn);
-        return this.connexions.add(conn);
+        this.getConnexions().add(conn);
+        return true;
+    }
+
+    /**
+     * Ajoute une connexion au réseau.
+     * @param conn la connexion à ajouter
+     * @return true si l’ajout a réussi, false sinon
+     */
+    public boolean ajouterConnexion2(Connexion conn){
+        if (conn == null || this.connexions.contains(conn))
+            return false;
+        conn.getMaison().setConnexion(conn);
+        this.getConnexions().add(conn);
+        return true;
     }
 
     /**
@@ -257,6 +271,14 @@ public class Reseau {
         this.generateurs = gens;
     }
 
+    public void setLambda(int lambda){
+        this.lambda = lambda ;
+    }
+
+    public int getLambda(){
+        return this.lambda ; 
+    }
+
     /**
      * Creer une copie profonde de l'instance reseau appelant
      * @return copie de l'instance this.
@@ -287,7 +309,7 @@ public class Reseau {
             //mapMaison.get(c.getMaison()).setConnexion(nc);
         }
 
-        copy.lampda = this.lampda;
+        copy.lambda = this.lambda;
         copy.totalCout = this.calculerCoutReseau();
 
         return copy;

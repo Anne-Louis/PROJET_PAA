@@ -19,7 +19,7 @@ public class SauvegardeReseau {
         if (fichierExiste(fichier)){
             throw new FileAlreadyExistsException("Un fichier contenant une configuration de réseau porte déjà ce nom !");
         }
-        fichier = "src/ressources/solutions/" + fichier ;
+        fichier = "src" + File.separator + "ressources" + File.separator + "solutions" + File.separator + fichier ;
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fichier)))) {
             for (Generateur gen : reseau.getGenerateurs()){
                 pw.println("generateur(" + gen.getNom() + "," + gen.getCapacite() + ").");
@@ -42,7 +42,7 @@ public class SauvegardeReseau {
      * @return true si le fichier existe déjà, false sinon
      */
     private static boolean fichierExiste(String fichier) {
-        File dossier = new File("src/ressources/configurations/");
+        File dossier = new File("src" + File.separator + "ressources" + File.separator + "configurations" + File.separator);
         File[] liste = dossier.listFiles();
 
         if (liste == null){

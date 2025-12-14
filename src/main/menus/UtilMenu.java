@@ -1,15 +1,15 @@
 package main.menus;
 
+import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import main.components.Connexion;
-import main.components.Generateur;
-import main.components.Maison;
-import main.components.NiveauConsommation;
-import main.components.Reseau;
-import main.io.SauvegardeReseau;
+import main.algorithmes.Algorithme1;
+import main.algorithmes.Algorithme2;
+import main.components.*;
+import main.exceptions.*;
+import main.io.*;
 
 /**
  * Classe utilitaire contenant les méthodes pour les différents menus
@@ -105,7 +105,7 @@ public class UtilMenu {
         String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
-        NiveauConsommation cons = NiveauConsommation.valueOf(ligne.split("\\s")[1]) ;
+        NiveauConsommation cons = NiveauConsommation.fromString(ligne.split("\\s")[1]) ;
                     
             for (Maison m : reseau.getMaisons()){
                 if (m.getNom().equals(nom)){
@@ -241,9 +241,76 @@ public class UtilMenu {
                 String fichier = lireStringAuClavier(sc, "Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
                 SauvegardeReseau.sauvegardeReseau(reseau, fichier);
                 fichierSauvegarder = true ;
+                System.out.println("Votre réseau a bien été sauvegardé !");
             } catch (FileAlreadyExistsException e) {
                 System.out.println(e);
             }
         }
+    }
+
+    public static Reseau chargerFichier(Reseau reseau, String filePath, int lambda) throws ImportException, InvalideReseauException{
+        System.out.println("Votre fichier sera chargé depuis le dossier : src/ressources/configurations/");
+        filePath = "src" + File.separator + "ressources" + File.separator + "configurations" + File.separator + filePath + ".txt";
+        
+        reseau = ParseFile.importerReseau(filePath);
+        reseau.validerReseau();
+        reseau.setLambda(lambda);
+        return reseau ;
+    }
+
+    public static void verifArguments(Reseau reseau, Scanner sc, String[] args) throws ArgumentsException{
+        switch (args.length){
+            case 1 :
+                if (verifLambda(args[0])){
+                    reseau.setLambda(Integer.parseInt(args[0]));
+                    Menu1.menu1(reseau, sc);
+                }
+                break ;
+            case 2 :
+                if (verifLambda(args[1])){
+                    try { 
+                        reseau = chargerFichier(reseau, args[0], Integer.parseInt(args[1]));
+                        Menu3.menu3(reseau, sc);
+                    } catch(ImportException e){
+                        System.out.println(e);
+                    } catch (InvalideReseauException e){
+                        System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
+                    }
+                }
+                break ;
+            default : 
+                throw new ArgumentsException("Le nombre d'arguments dans la ligne de commande n'est pas valide");
+        }        
+    }
+
+    private static boolean verifLambda(String lambda){
+        try {
+            Integer.parseInt(lambda);
+            return true ;
+        } catch (NumberFormatException e){
+            System.out.println("Le lambda doit être un entier supérieur ou égale à 0 !");
+            return false ;
+        }
+    }
+
+    public static void corrigerReseau(Reseau reseau){
+        reseau.getConnexions().clear();
+        for (Generateur g : reseau.getGenerateurs()){
+            for (Connexion c : g.getMaisons()){
+                reseau.ajouterConnexion2(c);
+            }
+        }
+    }
+
+    public static void optimiserReseau(Reseau reseau){
+        reseau = Algorithme2.resoudreReseau(reseau, Algorithme1.epsilonInit);
+        UtilMenu.corrigerReseau(reseau);
+        try {
+            reseau.validerReseau();
+        } catch(InvalideReseauException e){
+            System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
+        }
+        System.out.println(reseau);
+        System.out.println("Le coût du réseau vaut : "+ reseau.calculerCoutReseau());
     }
 }

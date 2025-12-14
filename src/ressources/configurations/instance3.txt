@@ -1,6 +1,6 @@
-generateur(gen1,1). 
-generateur(gen2,1). 
-generateur(gen3,10). 
+generateur(gen1,50). 
+generateur(gen2,60). 
+generateur(gen3,40). 
 generateur(gen4,10). 
 maison(maison1,NORMAL). 
 maison(maison2,NORMAL). 

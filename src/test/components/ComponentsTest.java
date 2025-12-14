@@ -45,10 +45,10 @@ class ComponentsTest {
         generateurs.add(gen2); 
         generateurs.add(gen3); 
 
-        msn1 = new Maison("maison1",NiveauConsommation.NORMAL);
+        msn1 = new Maison("maison1",NiveauConsommation.NORMALE);
         msn2 = new Maison("maison2",NiveauConsommation.BASSE);
         msn3 = new Maison("maison3",NiveauConsommation.FORTE);
-        msn4 = new Maison("maison4",NiveauConsommation.NORMAL);
+        msn4 = new Maison("maison4",NiveauConsommation.NORMALE);
         maisons = new ArrayList<>();
         maisons.add(msn1);
         maisons.add(msn2);
@@ -92,12 +92,12 @@ class ComponentsTest {
 
     @Test
     void creationMaisonTest(){
-        msnTest = new Maison("maison1", NiveauConsommation.NORMAL);
+        msnTest = new Maison("maison1", NiveauConsommation.NORMALE);
         msnTest.setConnexion(con1);
         assertEquals(msn1.getNiveau(), msnTest.getNiveau());
-        assertEquals(NiveauConsommation.NORMAL, msnTest.getNiveau());
+        assertEquals(NiveauConsommation.NORMALE, msnTest.getNiveau());
         assertEquals(msn1.getNom(), msnTest.getNom());
-        assertEquals(NiveauConsommation.NORMAL.getValeur(), msnTest.getConsommation());
+        assertEquals(NiveauConsommation.NORMALE.getValeur(), msnTest.getConsommation());
         assertEquals(con1, msnTest.getConnexion());
     }
 

@@ -50,10 +50,10 @@ public class UtilMenuTest {
         generateurs.add(gen2); 
         generateurs.add(gen3); 
 
-        msn1 = new Maison("maison1",NiveauConsommation.NORMAL);
+        msn1 = new Maison("maison1",NiveauConsommation.NORMALE);
         msn2 = new Maison("maison2",NiveauConsommation.BASSE);
         msn3 = new Maison("maison3",NiveauConsommation.FORTE);
-        msn4 = new Maison("maison4",NiveauConsommation.NORMAL);
+        msn4 = new Maison("maison4",NiveauConsommation.NORMALE);
         maisons = new ArrayList<>();
         maisons.add(msn1);
         maisons.add(msn2);
@@ -113,7 +113,7 @@ public class UtilMenuTest {
         
         assertEquals(1, reseauTest.getMaisons().size());
         assertEquals("M1", reseauTest.getMaisons().get(0).getNom());
-        assertEquals(NiveauConsommation.NORMAL, reseauTest.getMaisons().get(0).getNiveau());
+        assertEquals(NiveauConsommation.NORMALE, reseauTest.getMaisons().get(0).getNiveau());
     }
 
     @Test
@@ -123,7 +123,7 @@ public class UtilMenuTest {
         UtilMenu.creerMaison(reseauTest, sc);
 
         assertEquals(1, reseauTest.getMaisons().size());
-        assertEquals(NiveauConsommation.NORMAL, reseauTest.getMaisons().get(0).getNiveau());
+        assertEquals(NiveauConsommation.NORMALE, reseauTest.getMaisons().get(0).getNiveau());
     }
 
     @Test
