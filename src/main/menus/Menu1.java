@@ -17,13 +17,11 @@ import main.exceptions.InvalideReseauException;
  * lorsque l'utilisateur choisit l'option 5.
  */
 public class Menu1 {
-    /** Réseau électrique géré par l'application. */
-    private static Reseau reseau = new Reseau() ;
-
-    /** Scanner utilisé pour lire les entrées utilisateur. */
-    private static Scanner sc = new Scanner(System.in) ;
-    
-    public static void menu1(){
+    /**
+     * @param reseau le reseau qu'on va chercher à optimiser puis sauvegarder sa solution
+     * @param sc le scanner pour enregistrer les choix de l'utilisateur
+     */
+    public static void menu1(Reseau reseau, Scanner sc){
         boolean fin = false ;
 
         while (!fin){
@@ -54,19 +52,17 @@ public class Menu1 {
                     break ;
                 case 5 :
                     try{
-                        if (!reseau.validerReseau()){
-                        break ;
+                        if (reseau.validerReseau()){
+                            fin = true ;
+                            Menu3.menu3(reseau, sc) ;
                         }
                     }catch(InvalideReseauException e){
                         System.out.println(e.getMessage());
                     }
-                    fin = true ;
-                    Menu2.menu2(reseau, sc) ;
                     break ;
                 default :
                     System.out.println("Ce n'est pas un choix valide !");
             }
         }
-        sc.close();
     }
 }
