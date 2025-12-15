@@ -3,7 +3,6 @@ package main.menus;
 import java.util.Scanner;
 import main.components.Reseau;
 import main.exceptions.InvalideReseauException;
-import main.algorithmes.*;
 
 /**
  * Menu tertiaire d'optimisation du réseau (menu 3).
@@ -40,7 +39,7 @@ public class Menu3 {
 
             switch(nb){
                 case 1 :
-                    UtilMenu.optimiserReseau(reseau);
+                    reseau = UtilMenu.optimiserReseau(reseau);
                     break ;
                 case 2 :
                     UtilMenu.sauvegardeSolution(reseau, sc);

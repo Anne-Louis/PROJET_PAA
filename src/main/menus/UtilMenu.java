@@ -302,15 +302,17 @@ public class UtilMenu {
         }
     }
 
-    public static void optimiserReseau(Reseau reseau){
+    public static Reseau optimiserReseau(Reseau reseau){
         reseau = Algorithme2.resoudreReseau(reseau, Algorithme1.epsilonInit);
         UtilMenu.corrigerReseau(reseau);
         try {
             reseau.validerReseau();
+            System.out.println(reseau);
+            System.out.println("Le coût du réseau vaut : "+ reseau.calculerCoutReseau());
+            return reseau ;
         } catch(InvalideReseauException e){
             System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
+            return null ;
         }
-        System.out.println(reseau);
-        System.out.println("Le coût du réseau vaut : "+ reseau.calculerCoutReseau());
     }
 }
