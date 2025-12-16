@@ -9,9 +9,9 @@ import java.util.ArrayList;
  * L'objectif est de minimiser le coût global du réseau tout en
  * équilibrant la charge des générateurs.
  */
-public class Algorithme2 {
+public class Algorithme {
+    public static double  epsilonInit = 0.5;
 
-    /**
     /**
      * Alloue les maisons au générateurs par :
      * par tri des maisons par ordres decroisante de consommation.
