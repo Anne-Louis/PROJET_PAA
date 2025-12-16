@@ -16,9 +16,9 @@ import main.io.*;
  */
 public class UtilMenu {
     /**
-	 * Cette methode lit un entier dans un scanner, et s'assure que c'est bien un
-	 * entier qui a ete lu. Dans le cas contraire, un message est affiche a
-	 * l'utilisateur, et un nouveal entier est demande.
+	 * Cette méthode lit un entier dans un scanner, et s'assure que c'est bien un
+	 * entier qui a été lu. Dans le cas contraire, un message est affiche a
+	 * l'utilisateur, et un nouvel entier est demandé.
 	 * 
      * @author Jérôme Delobelle (Correction du TP5 de PAA, MathMenu.java)
 	 * @param sc le scanner dans lequel on veut lire un entier
@@ -54,7 +54,7 @@ public class UtilMenu {
 	 * @param message le message affiche à l'utilisateur pour demander la chaîne de caractère
 	 * @return la chaîne de caractère lue
 	 */
-	public static String lireStringAuClavier(Scanner sc, String message) {
+	private static String lireStringAuClavier(Scanner sc, String message) {
 		String res = "";
 		boolean lectureOK = false;
 
@@ -62,11 +62,17 @@ public class UtilMenu {
 			try {
 				System.out.print(message);
 				res = sc.nextLine();
+                if (res.split("\\s").length != 2){
+                    throw new NombreDeTermesException("Le nombre de termes utilisés doit être de deux !");
+                }
 				lectureOK = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Il faut taper une chaîne de caractère");
 				sc.nextLine();
-			}
+			} catch (NombreDeTermesException e){
+                System.out.println(e);
+                sc.nextLine();
+            }
 		}
 		return res;
 	}
@@ -81,18 +87,20 @@ public class UtilMenu {
         String message = "Veuillez saisir le générateur à enregistrer ainsi que sa puissance (ex : G1 60) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
-        double cap = Double.parseDouble(ligne.split("\\s")[1]) ;
-
-        for (Generateur g : reseau.getGenerateurs()){
-            if (g.getNom().equals(nom)){
-                g.setcapacite(cap);
-                System.out.println("Le générateur " + nom + " existe déjà, sa capacité à été mise à jour : " + cap + "kW") ;
-                return ;
+        try {
+            double cap = Double.parseDouble(ligne.split("\\s")[1]) ;
+            Generateur g = reseau.trouverGenerateurParNom(nom);
+            if (g != null){
+                    g.setcapacite(cap);
+                    System.out.println("Le générateur " + nom + " existe déjà, sa capacité à été mise à jour : " + cap + "kW") ;
+                    return ;
             }
+            Generateur gen = new Generateur(nom, cap);
+            reseau.ajouterGenerateur(gen) ;
+            System.out.println("Le générateur " + gen.getNom() + " a bien été crée !");
+        } catch (NumberFormatException e){
+            System.out.println(e);
         }
-        Generateur gen = new Generateur(nom, cap);
-        reseau.ajouterGenerateur(gen) ;
-        System.out.println("Le générateur " + gen.getNom() + " a bien été crée !");
     }
 
     /**
@@ -105,8 +113,8 @@ public class UtilMenu {
         String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
-        NiveauConsommation cons = NiveauConsommation.fromString(ligne.split("\\s")[1]) ;
-                    
+        try {
+            NiveauConsommation cons = NiveauConsommation.fromString(ligne.split("\\s")[1]) ;
             for (Maison m : reseau.getMaisons()){
                 if (m.getNom().equals(nom)){
                     m.setConsommation(cons) ;
@@ -117,6 +125,9 @@ public class UtilMenu {
             Maison maison = new Maison(nom, cons);
             reseau.ajouterMaison(maison) ;
             System.out.println("La maison " + maison.getNom() + " a bien été crée !");
+        } catch (IllegalArgumentException e){
+            System.out.println(e);
+        }
     }
 
     /**
@@ -126,43 +137,24 @@ public class UtilMenu {
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      * @param message le message à envoyer à l'utilisateur
      * @return connexion la connexion construite à partir du générateur et de la maison
+     * @throws GenerateurInexistantException 
+     * @throws MaisonInexistanteException 
      */
-    public static Connexion enregistrerConnexion(Reseau reseau, Scanner sc, String message){
+    public static Connexion enregistrerConnexion(Reseau reseau, Scanner sc, String message) throws GenerateurInexistantException, MaisonInexistanteException{
         String ligne = lireStringAuClavier(sc, message) ;
         Generateur genC = null ;
         Maison maiC = null ;
 
-        if (ligne.startsWith("G")){
-            for (Generateur g : reseau.getGenerateurs()){
-                if (g.getNom().equals(ligne.split("\\s")[0])){
-                    genC = g ;
-                }
-            }
-            for (Maison m : reseau.getMaisons()){
-                if (m.getNom().equals(ligne.split("\\s")[1])){
-                    maiC = m ;
-                }
-            }
-        } else if (ligne.startsWith("M")){
-            for (Generateur g : reseau.getGenerateurs()){
-                if (g.getNom().equals(ligne.split("\\s")[1])){
-                    genC = g ;
-                }
-            }
-            for (Maison m : reseau.getMaisons()){
-                if (m.getNom().equals(ligne.split("\\s")[0])){
-                    maiC = m ;
-                }
-            }
-        }
+        genC = reseau.trouverGenerateurParNom(ligne.split("\\s")[0]);
+        maiC = reseau.trouverMaisonParNom(ligne.split("\\s")[1]);
+        genC = reseau.trouverGenerateurParNom(ligne.split("\\s")[1]);
+        maiC = reseau.trouverMaisonParNom(ligne.split("\\s")[0]);
 
         if (genC == null){
-            System.out.println("Le générateur n'existe pas !");
-            return null;
+            throw new GenerateurInexistantException("Le générateur n'existe pas");
         }
         if (maiC == null){
-            System.out.println("La maison n'existe pas !");
-            return null;
+            throw new MaisonInexistanteException("La maison n'existe pas !");
         }
 
         return new Connexion(genC, maiC) ;
@@ -176,19 +168,21 @@ public class UtilMenu {
      */
     public static void creerConnexion(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir la connexion à enregistrer  (ex : G1 M1 ou M1 G1) : " ;
-        Connexion con = enregistrerConnexion(reseau, sc, message) ;
-
-        if (con == null){
-            return ;
+        Connexion con = null ;
+        try {
+            con = enregistrerConnexion(reseau, sc, message) ;
+        } catch (GenerateurInexistantException e) {
+            System.out.println(e);
+        } catch (MaisonInexistanteException e){
+            System.out.println(e);
         }
+
         for (Connexion c : reseau.getConnexions()){
             if (con.equals(c)){
                 System.out.println("Cette connexion existe déjà") ;
                 return;
             }
         }
-        con.getGenerateur().ajouterConnexion(con);
-        con.getMaison().setConnexion(con) ;
         reseau.ajouterConnexion(con) ;
         System.out.println("La connexion " + con.toString() + " a bien été crée !");
     }
@@ -200,15 +194,20 @@ public class UtilMenu {
      */
     public static boolean supprimerConnexion(Reseau reseau, Scanner sc){
         String message = "Veuillez saisir la connexion que vous souhaitez modifier : " ;
-        Connexion con = enregistrerConnexion(reseau, sc, message);
+        Connexion con = null ;
+        try {
+            con = enregistrerConnexion(reseau, sc, message) ;
+        } catch (GenerateurInexistantException e) {
+            System.out.println(e);
+        } catch (MaisonInexistanteException e){
+            System.out.println(e);
+        }
         if (con == null){
             System.out.println("Cette connexion n'existe pas !") ;
             return false;
         }
                     
         reseau.supprimerConnexion(con);
-        con.getGenerateur().supprimerConnexion(con);
-        con.getMaison().setConnexion(null);
         System.out.println("La connexion " + con.toString() + " a bien été modifié !");
         return true ;
     }
@@ -238,7 +237,8 @@ public class UtilMenu {
         boolean fichierSauvegarder = false ;
         while(!fichierSauvegarder){
             try {
-                String fichier = lireStringAuClavier(sc, "Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
+                System.out.println("Quel est le nom de votre fichier ? (pas besoin d'ajouter le .txt) : ");
+                String fichier = sc.nextLine();
                 SauvegardeReseau.sauvegardeReseau(reseau, fichier);
                 fichierSauvegarder = true ;
                 System.out.println("Votre réseau a bien été sauvegardé !");
@@ -285,7 +285,10 @@ public class UtilMenu {
 
     private static boolean verifLambda(String lambda){
         try {
-            Integer.parseInt(lambda);
+            int nombre = Integer.parseInt(lambda);
+            if (nombre < 0){
+                throw new NumberFormatException();
+            }
             return true ;
         } catch (NumberFormatException e){
             System.out.println("Le lambda doit être un entier supérieur ou égale à 0 !");
@@ -293,18 +296,8 @@ public class UtilMenu {
         }
     }
 
-    public static void corrigerReseau(Reseau reseau){
-        reseau.getConnexions().clear();
-        for (Generateur g : reseau.getGenerateurs()){
-            for (Connexion c : g.getMaisons()){
-                reseau.ajouterConnexion2(c);
-            }
-        }
-    }
-
     public static Reseau optimiserReseau(Reseau reseau){
         reseau = Algorithme2.resoudreReseau(reseau, Algorithme1.epsilonInit);
-        UtilMenu.corrigerReseau(reseau);
         try {
             reseau.validerReseau();
             System.out.println(reseau);
