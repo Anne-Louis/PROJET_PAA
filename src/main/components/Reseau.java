@@ -24,7 +24,7 @@ public class Reseau {
     /** Facteur de séverité de pénalisation utilisé pour le calcul du coût du réseau. 
      * Pour la première partie du projet, il sera fixé arbitrairement à 10.
      */
-    private int lambda;
+    public static int lampda;
 
     /** Coût total du réseau. */
     private double totalCout;
@@ -34,7 +34,7 @@ public class Reseau {
         generateurs = new ArrayList<Generateur>();
         maisons = new ArrayList<Maison>();
         connexions = new ArrayList<Connexion>();
-        lambda = 10; totalCout = 1.0;
+        lampda = 10; totalCout = 1.0;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Reseau {
         this.generateurs = gens;
         this.maisons = msns;
         this.connexions = conns;
-        lambda = 10;totalCout = 0.0;
+        lampda = 10;totalCout = 0.0;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Reseau {
         this.generateurs = new ArrayList<>(r.getGenerateurs());
         this.maisons = new ArrayList<>(r.getMaisons());
         this.connexions = new ArrayList<>(r.getConnexions());
-        this.lambda = r.lambda;
+        this.lampda = r.lampda;
         this.totalCout = r.totalCout;
     }
     
@@ -101,7 +101,7 @@ public class Reseau {
             dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
             surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
         }
-        this.totalCout = ((surchargeReseau * lambda) + dispertionReseau);
+        this.totalCout = ((surchargeReseau * lampda) + dispertionReseau);
         
         return this.totalCout;
     }
@@ -171,7 +171,7 @@ public class Reseau {
      * @return true si l’ajout a réussi, false sinon
      */
     public boolean ajouterMaison(Maison msn){
-        if (msn == null)
+        if (msn == null || this.maisons.contains(msn))
             return false;
         return this.maisons.add(msn);
     }
@@ -182,7 +182,7 @@ public class Reseau {
      * @return true si l’ajout a réussi, false sinon
      */
     public boolean ajouterGenerateur(Generateur gen){
-        if (gen == null)
+        if (gen == null || this.generateurs.contains(gen))
             return false;
         return this.generateurs.add(gen);
     }
@@ -195,23 +195,14 @@ public class Reseau {
     public boolean ajouterConnexion(Connexion conn){
         if (conn == null || this.connexions.contains(conn))
             return false;
+
         conn.getGenerateur().ajouterConnexion(conn);
         conn.getMaison().setConnexion(conn);
-        this.getConnexions().add(conn);
-        return true;
-    }
 
-    /**
-     * Ajoute une connexion au réseau.
-     * @param conn la connexion à ajouter
-     * @return true si l’ajout a réussi, false sinon
-     */
-    public boolean ajouterConnexion2(Connexion conn){
-        if (conn == null || this.connexions.contains(conn))
-            return false;
-        conn.getMaison().setConnexion(conn);
-        this.getConnexions().add(conn);
-        return true;
+        ajouterGenerateur(conn.getGenerateur());
+        ajouterMaison(conn.getMaison());
+
+        return this.connexions.add(conn);
     }
 
     /**
@@ -271,14 +262,6 @@ public class Reseau {
         this.generateurs = gens;
     }
 
-    public void setLambda(int lambda){
-        this.lambda = lambda ;
-    }
-
-    public int getLambda(){
-        return this.lambda ; 
-    }
-
     /**
      * Creer une copie profonde de l'instance reseau appelant
      * @return copie de l'instance this.
@@ -300,20 +283,21 @@ public class Reseau {
             mapMaison.put(m, nm);
             copy.ajouterMaison(nm);
         }
-
+        
         for (Connexion c : this.connexions) {
-            Connexion nc=new  Connexion(mapGen.get(c.getGenerateur()), mapMaison.get(c.getMaison()));
-            copy.ajouterConnexion(nc);
+            Generateur ng = mapGen.get(c.getGenerateur());
+            Maison nm = mapMaison.get(c.getMaison());
 
-            //mapGen.get(c.getGenerateur()).ajouterConnexion(nc);
-            //mapMaison.get(c.getMaison()).setConnexion(nc);
+            Connexion nc = new Connexion(ng, nm);
+            copy.ajouterConnexion(nc);
         }
 
-        copy.lambda = this.lambda;
-        copy.totalCout = this.calculerCoutReseau();
+        copy.lampda = this.lampda;
+        copy.totalCout = this.totalCout;
 
         return copy;
     }
+
 
     /**
      * Methode de recherche d'une instance maison par son
@@ -370,5 +354,20 @@ public class Reseau {
             Connexion nouvelleConnexion = new Connexion(generateur, maison);
             ajouterConnexion(nouvelleConnexion);
         }
+    }
+
+
+    /**
+     * vider le reseau 
+     */
+    public void clear(){
+            this.getConnexions().clear();
+            for (Generateur g : this.getGenerateurs()) {
+                g.getMaisons().clear();
+            }
+            for (Maison m : this.getMaisons()) {
+                m.setConnexion(null);
+            }
+
     }
 }
