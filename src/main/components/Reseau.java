@@ -220,6 +220,10 @@ public class Reseau {
      * @return true si la suppression a réussi, false sinon
      */
     public boolean supprimerConnexion(Connexion c){
+        if (c == null || this.connexions.contains(c))
+            return false;
+        c.getGenerateur().supprimerConnexion(c);
+        c.getMaison().setConnexion(null);
         return this.connexions.remove(c) ;
     }
 

@@ -29,7 +29,7 @@ public class Menu3 {
         while (!fin){
             System.out.println("-------------------- Gestion réseau --------------------");
             System.out.println("----------- Optimisation d'un réseau (Menu 3) ---------");
-            System.out.println("1) resolution automatique ;") ;
+            System.out.println("1) résolution automatique ;") ;
             System.out.println("2) sauvegarder la solution actuelle ;") ;
             System.out.println("3) fin.");
             System.out.println("--------------------------------------------------------");
