@@ -9,7 +9,7 @@
             "name": "Test simple",
             "request": "launch",
             "mainClass": "main.Main",
-            "args": "10"
+            "args": "instance1 10"
         }
     ]
 }

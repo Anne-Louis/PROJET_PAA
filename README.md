@@ -21,7 +21,7 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 
 ## Point d'entrée du projet 
 
-Le fichier principal du programme se trouve dans le dossier `src/test/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Menu.java`.
+Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`.
 
 ## Comment Exécuter
 
@@ -29,26 +29,29 @@ Assurez-vous d'avoir Java installé sur votre système.
 
 1. Clonez ce dépôt.
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande : javac -d bin src/main/*.java src/test/Test.java
-4. Puis la commande : java -cp bin src/test/Test.java
+3. Exécutez la commande : javac -d bin src/*
+4. Puis la commande : java -cp bin src/main/Main.java
 
-## Fonctionnalités (Partie 1)
+## Fonctionnalités (Partie 2)
 
-Au lancement, le programme affiche un menu principal :
+Le programme se lance via le terminal avec des arguments (nom de fichier, lambda) dans la ligne de commande. La présence d'une valeur pour le lambda est obligatoire, la présence d'un fichier n'est pas obligatoire.
+En fonction du nombre d'arguments, un menu différent s'ouvre :
+- 1 : ouvre le menu de création de réseau manuel puis une fois la création terminé, ouvre le menu d'optimisation du réseau
+- 2 : ouvre le menu d'optimisation du réseau directement
 
-**Menu principal**
+**Menu création de réseau**
 
 - Ajouter un générateur
 - Ajouter une maison
 - Ajouter une connexion entre une maison et un générateur
-- Terminer la configuration
+- Supprimer une connexion entre une maison et un générateur
+- Terminer la création de réseau
 
-**Menu secondaire**
+**Menu optimisation du réseau**
 
-Une fois la configuration terminée :
-- Calculer le coût du réseau électrique actuel
-- Modifier une connexion
-- Afficher le réseau électrique
+Une fois le réseau créé ou chargé depuis un fichier :
+- Optimiser via un algorithme le coût du réseau
+- Sauvegarder le réseau dans un fichier
 - Quitter le programme
 
 
@@ -58,40 +61,47 @@ Une fois la configuration terminée :
 src/
  ├── main/
  │    ├── algorithmes/
- │    │    ├── Algo1.java                      # Algorithme d'optimisation du coût
- │    │    ├── Algo2.java                      # Algorithme d'optimisation du coût
- |    |    ---
+ │    │    ├── Algorithme.java                        # Algorithme d'optimisation du coût
+ │    │    └── skelton_algorithme.txt                 # Pseudo-code de l'algorithme
  │    ├── components/
- │    |    ├── Connexion.java                  # Gestion des connexions
- │    |    ├── Generateur.java                 # Gestion des générateurs
- │    |    ├── Maison.java                     # Gestion des maisons
- │    |    ├── NiveauConsommation.java         # Enumération des niveaux de consommation des maisons
- │    |    └── Reseau.java                     # Gestion du réseau
+ │    |    ├── Connexion.java                         # Gestion des connexions
+ │    |    ├── Generateur.java                        # Gestion des générateurs
+ │    |    ├── Maison.java                            # Gestion des maisons
+ │    |    ├── NiveauConsommation.java                # Enumération niveaux consommation des maisons
+ │    |    └── Reseau.java                            # Gestion du réseau
  │    ├── exceptions/
- │    │    ├── FormatInvalideException         # Exception personnalisée mauvais format de fichier
- │    │    ├── GenerateurManquantException     # Exception personnalisée générateur manquant
- │    │    └── MaisonManquantException         # Exception personnalisée maison manquant
+ │    │    ├── ArgumentsException.java                # Exception mauvais nombre arguments
+ │    │    ├── ConnexionDejaExistanteException.java   # Exception connexion existant
+ │    │    ├── GenerateurInexistantException.java     # Exception générateur inexistant
+ │    │    ├── ImportException.java                   # Exception problème d'importation
+ │    │    ├── InvalideReseauException.java           # Exception réseau non valide
+ │    │    ├── MaisonInexistanteException.java        # Exception maison inexistante
+ │    │    ├── NombreDeTermesException.java           # Exception mauvais nombre de termes
+ │    │    └── NomDejaPrisException.java              # Exception nom déjà pris
  |    ├── io/
- │    |    ├── ParseFile.java                  # Création d'un réseau via un fichier
- │    |    └── FileSaver.java                  # Sauvegarde d'un réseau via un fichier
- │    └── menus/
- │         ├── Menu1.java                      # Gestion menu pour créer manuellement le réseau
- │         ├── Menu2.java                      # Gestion menu pour modifier manuellement le réseau
- │         └── Menu3.java                      # Gestion menu lire un fichier et optimiser le coût
+ │    |    ├── ParseFile.java                         # Création d'un réseau via un fichier
+ │    |    └── SauvegardeReseau.java                  # Sauvegarde d'un réseau via un fichier
+ │    ├── menus/
+ │    |    ├── Menu1.java                             # Menu pour créer manuellement le réseau
+ │    |    ├── Menu2.java                             # Menu pour modifier manuellement le réseau
+ │    |    ├── Menu3.java                             # Menu lire un fichier et optimiser le coût
+ │    |    └── UtilMenu.java                          # Classe contenant méthodes pour menus
+ │    └── Main.java                                   # Entrée du programme
  ├── ressources/
  │    ├── configurations                       
- |    |    ├── instance1.txt                   # Fichier à lire pour créer un réseau
- │    │    └── instance2.txt                   # Fichier à lire pour créer un réseau
+ |    |    ├── instance1.txt                          # Fichier à lire pour créer un réseau
+ │    │    └── instance2.txt                          # Fichier à lire pour créer un réseau
+ |    |     ---
  │    ├── modelisations/                   
- │    │    ├── modelisation1.pdf               # Première modélisation avec diagramme de classes
- │    │    └── modelisation2.pdf               # Deuxième modélisation avec diagramme de classes
+ │    │    ├── modelisation1.pdf                      # Première modélisation diagramme de classes
+ │    │    └── modelisation2.jpg                      # Deuxième modélisation diagramme de classes
  │    └── solutions
- |         ├── solution1.txt                   # Fichier contenant une solution
- │         └── solution2.txt                   # Fichier contenant une solution           
+ |         ├── solution1.txt                          # Fichier contenant une solution
+ │         └── solution2.txt                          # Fichier contenant une solution     
+ |          ---      
  └── test/
-      └── Test1.java                           # Test unitaire
-      └── Test2.java                           # Test unitaire
-      ...
+      └── components/                                 # Test unitaire
+      └── menus/                                      # Test unitaire
 
 ```
 

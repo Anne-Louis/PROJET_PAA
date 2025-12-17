@@ -24,7 +24,7 @@ public class Reseau {
     /** Facteur de séverité de pénalisation utilisé pour le calcul du coût du réseau. 
      * Pour la première partie du projet, il sera fixé arbitrairement à 10.
      */
-    public static int lampda;
+    private int lampda;
 
     /** Coût total du réseau. */
     private double totalCout;
@@ -264,6 +264,10 @@ public class Reseau {
      */
     public void setGenerateurs(List<Generateur> gens){
         this.generateurs = gens;
+    }
+
+    public void setLampda(int lampda){
+        this.lampda = lampda ;
     }
 
     /**

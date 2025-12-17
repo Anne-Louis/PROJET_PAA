@@ -5,8 +5,7 @@ import java.nio.file.FileAlreadyExistsException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import main.algorithmes.Algorithme1;
-import main.algorithmes.Algorithme2;
+import main.algorithmes.Algorithme;
 import main.components.*;
 import main.exceptions.*;
 import main.io.*;
@@ -89,6 +88,10 @@ public class UtilMenu {
         String nom = ligne.split("\\s")[0] ;
         try {
             double cap = Double.parseDouble(ligne.split("\\s")[1]) ;
+            if (cap <= 0){
+                System.out.println("Un générateur doit avoir une capacité strictement positive");
+                return ;
+            }
             Generateur g = reseau.trouverGenerateurParNom(nom);
             if (g != null){
                     g.setcapacite(cap);
@@ -254,7 +257,7 @@ public class UtilMenu {
         
         reseau = ParseFile.importerReseau(filePath);
         reseau.validerReseau();
-        reseau.setLambda(lambda);
+        reseau.setLampda(lambda);
         return reseau ;
     }
 
@@ -262,7 +265,7 @@ public class UtilMenu {
         switch (args.length){
             case 1 :
                 if (verifLambda(args[0])){
-                    reseau.setLambda(Integer.parseInt(args[0]));
+                    reseau.setLampda(Integer.parseInt(args[0]));
                     Menu1.menu1(reseau, sc);
                 }
                 break ;
@@ -297,7 +300,7 @@ public class UtilMenu {
     }
 
     public static Reseau optimiserReseau(Reseau reseau){
-        reseau = Algorithme2.resoudreReseau(reseau, Algorithme1.epsilonInit);
+        reseau = Algorithme.resoudreReseau(reseau, Algorithme.epsilonInit);
         try {
             reseau.validerReseau();
             System.out.println(reseau);
