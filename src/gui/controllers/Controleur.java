@@ -133,7 +133,7 @@ public class Controleur {
      * Optimise le réseau selon un seuil donné.
      */
     public static void optimiser(double epsilon) {
-        reseau = Algorithme1.resoudreReseau(reseau, epsilon);
+        reseau = Algorithme.resoudreReseau(reseau, epsilon);
         calculerCoutReseaiu();
     }
 
