@@ -1,0 +1,31 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "lib\\javafx.base.jar",
+        "lib\\javafx.controls.jar",
+        "lib\\javafx.fxml.jar",
+        "lib\\javafx.graphics.jar",
+        "lib\\javafx.media.jar",
+        "lib\\javafx.swing.jar",
+        "lib\\javafx.web.jar",
+        "lib\\javafx-swt.jar",
+        "lib\\jdk.jsobject.jar",
+        "lib\\jfx.incubator.input.jar",
+        "lib\\jfx.incubator.richtext.jar",
+        "lib\\junit-platform-console-standalone-1.13.0-M3.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\jfx.incubator.richtext.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\jfx.incubator.input.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.base.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.media.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\jdk.jsobject.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx-swt.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.web.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\junit-platform-console-standalone-1.13.0-M3.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.graphics.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.fxml.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.controls.jar",
+        "c:\\Users\\noumo\\Desktop\\partie stable\\PROJET_PAA\\lib\\javafx.swing.jar"
+    ]
+}

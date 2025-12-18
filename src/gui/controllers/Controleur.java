@@ -12,7 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import main.algorithmes.Algorithme1;
+import main.algorithmes.Algorithme;
 import main.components.Connexion;
 import main.components.Generateur;
 import main.components.Maison;

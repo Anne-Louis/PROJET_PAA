@@ -257,7 +257,7 @@ public class UtilMenu {
         
         reseau = ParseFile.importerReseau(filePath);
         reseau.validerReseau();
-        reseau.setLampda(lambda);
+        reseau.setLambda(lambda);
         return reseau ;
     }
 
@@ -265,7 +265,7 @@ public class UtilMenu {
         switch (args.length){
             case 1 :
                 if (verifLambda(args[0])){
-                    reseau.setLampda(Integer.parseInt(args[0]));
+                    reseau.setLambda(Integer.parseInt(args[0]));
                     Menu1.menu1(reseau, sc);
                 }
                 break ;
