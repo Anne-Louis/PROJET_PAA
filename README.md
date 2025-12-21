@@ -144,14 +144,14 @@ Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous po
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
 3. Exécutez la commande pour la compilation :
 ```
-javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java
+javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java .src/test/io/*.java
 ```
 
 4. Puis la commande pour l'éxecution :
 ```
 java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main + le nom du fichier + la valeur de lambda.
 ```
-(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier,le fichier doit obligatoirement se trouver dans le dossier `src/ressources/confiugrations` la valeur de lambda doit être supérieure ou égale à 0).
+(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier, le fichier doit obligatoirement se trouver dans le dossier `src/ressources/configurations` la valeur de lambda doit être supérieure ou égale à 0).
 
 5. (Optionnel) Si l'erreur : 
 ```
