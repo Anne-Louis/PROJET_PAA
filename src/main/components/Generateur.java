@@ -135,6 +135,10 @@ public class Generateur {
         return calculCharge()/capacite ;
     }
     
+    /**
+    * Retourne une représentation textuelle du générateur.
+    * @return une chaîne de caractère décrivant le générateur
+    */
     @Override
     public String toString() {
         return nom + "-" + capacite +" KW";

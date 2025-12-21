@@ -24,7 +24,7 @@ public class Reseau {
     /** Facteur de séverité de pénalisation utilisé pour le calcul du coût du réseau. 
      * Pour la première partie du projet, il sera fixé arbitrairement à 10.
      */
-    private int lampda;
+    private int lambda;
 
     /** Coût total du réseau. */
     private double totalCout;
@@ -34,7 +34,7 @@ public class Reseau {
         generateurs = new ArrayList<Generateur>();
         maisons = new ArrayList<Maison>();
         connexions = new ArrayList<Connexion>();
-        lampda = 10; totalCout = 1.0;
+        lambda = 10; totalCout = 1.0;
     }
 
     /**
@@ -47,7 +47,7 @@ public class Reseau {
         this.generateurs = gens;
         this.maisons = msns;
         this.connexions = conns;
-        lampda = 10;totalCout = 0.0;
+        lambda = 10;totalCout = 0.0;
     }
 
     /**
@@ -58,7 +58,7 @@ public class Reseau {
         this.generateurs = new ArrayList<>(r.getGenerateurs());
         this.maisons = new ArrayList<>(r.getMaisons());
         this.connexions = new ArrayList<>(r.getConnexions());
-        this.lampda = r.lampda;
+        this.lambda = r.lambda;
         this.totalCout = r.totalCout;
     }
     
@@ -101,7 +101,7 @@ public class Reseau {
             dispertionReseau += Math.abs(gen.calculTauxUtilisation() - capaciteMoyenne);
             surchargeReseau += Math.max(0, gen.calculTauxUtilisation() - 1);
         }
-        this.totalCout = ((surchargeReseau * lampda) + dispertionReseau);
+        this.totalCout = ((surchargeReseau * lambda) + dispertionReseau);
         
         return this.totalCout;
     }
@@ -118,7 +118,7 @@ public class Reseau {
             return false;
         this.connexions.set(index, newConn);
         return true;
-    }
+    } 
 
     /**
      * Vérifie si le réseau est valide.
@@ -126,6 +126,7 @@ public class Reseau {
      * est supérieure ou égale à la consommation totale des maisons
      * et si chaque maison est reliée à un seul et unique générateur.
      * @return true si le réseau est valide, false sinon
+     * @throws InvalideReseauException
      */
     public boolean validerReseau() throws InvalideReseauException {
         double totalCapacite = 0;
@@ -266,12 +267,16 @@ public class Reseau {
         this.generateurs = gens;
     }
 
-    public void setLambda(int lampda){
-        this.lampda = lampda ;
+    /**
+     * Met à jour le lambda (valeur de sévérité de pénalisation) du réseau
+     * @param lambda
+     */
+    public void setLambda(int lambda){
+        this.lambda = lambda ;
     }
 
     /**
-     * Creer une copie profonde de l'instance reseau appelant
+     * Creer une copie profonde de l'instance réseau appelant
      * @return copie de l'instance this.
      */
     public Reseau copierReseau() {
@@ -300,7 +305,7 @@ public class Reseau {
             copy.ajouterConnexion(nc);
         }
 
-        copy.lampda = this.lampda;
+        copy.lambda = this.lambda;
         copy.totalCout = this.totalCout;
 
         return copy;
@@ -366,7 +371,7 @@ public class Reseau {
 
 
     /**
-     * vider le reseau 
+     * vide le reseau 
      */
     public void clear(){
             this.getConnexions().clear();
@@ -376,6 +381,5 @@ public class Reseau {
             for (Maison m : this.getMaisons()) {
                 m.setConnexion(null);
             }
-
     }
 }

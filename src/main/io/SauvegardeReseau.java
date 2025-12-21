@@ -13,6 +13,7 @@ public class SauvegardeReseau {
     /**
      * @param reseau le reseau à sauvegarder
      * @param fichier le nom du fichier dans lequel on va sauvegarder la solution
+     * @throws FileAlreadyExistsException
      */
     public static void sauvegardeReseau(Reseau reseau, String fichier) throws FileAlreadyExistsException{
         fichier = fichier + ".txt";

@@ -16,7 +16,7 @@ import main.io.*;
 public class UtilMenu {
     /**
 	 * Cette méthode lit un entier dans un scanner, et s'assure que c'est bien un
-	 * entier qui a été lu. Dans le cas contraire, un message est affiche a
+	 * entier qui a été lu. Dans le cas contraire, un message est affiché a
 	 * l'utilisateur, et un nouvel entier est demandé.
 	 * 
      * @author Jérôme Delobelle (Correction du TP5 de PAA, MathMenu.java)
@@ -42,8 +42,9 @@ public class UtilMenu {
 	}
 
     /**
-	 * Cette methode lit une chaîne de caractère dans un scanner, et s'assure que c'est bien une
-	 * chaîne de caractère qui a été lu. Dans le cas contraire, un message est affiché à
+	 * Cette methode lit une chaîne de caractère dans un scanner, 
+     * et s'assure que le nombre de terme entré dans le scanner est bien de 2. 
+     * Dans le cas contraire, un message est affiché à
 	 * l'utilisateur, et une nouvelle chaîne de caractère est demandée.
 	 * 
      * inspiré de la méthode lireEntierAuClavier de Jérôme Delobelle
@@ -218,6 +219,8 @@ public class UtilMenu {
     /**
      * Permet à l'utilisateur de modifier une connexion existante.
      * La connexion est supprimée puis une nouvelle est créée.
+     * Méthode utilisée pour la partie 1 du projet.
+     * ELLE N'EST PLUS UTILISEE !!!
      * @param reseau le reseau sur lequel on va modifier la connexion
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
@@ -231,8 +234,8 @@ public class UtilMenu {
      * Permet à l'utilisateur de sauvegarder la solution d'un réseau
      * dans un fichier de son choix.
      * Si le fichier existe déjà, il est remplacé sinon un nouveau est crée.
-     * @param reseau
-     * @param sc
+     * @param reseau le reseau qu'on va sauvegarder dans un fichier
+     * @param sc le scanner contenant le nom du fichier
      */
     public static void sauvegardeSolution(Reseau reseau, Scanner sc){
         System.out.println("Votre fichier sera sauvegarde dans le dossier : src/ressources/solutions/");
@@ -254,8 +257,11 @@ public class UtilMenu {
     /**
      * Permet à l'utilisateur de charger un réseau depuis un fichier
      * Si le fichier existe déjà, il est remplacé sinon un nouveau est crée.
-     * @param reseau
-     * @param sc
+     * @param reseau le reseau vide dans lequel on va importer le fichier qu'on charge
+     * @param filePath le nom du fichier
+     * @param lambda la valeur de sévérité de pénalisation définie pour le réseau
+     * @throws ImportException
+     * @throws InvalideReseauException
      */
     public static Reseau chargerFichier(Reseau reseau, String filePath, int lambda) throws ImportException, InvalideReseauException{
         System.out.println("Votre fichier sera charge depuis le dossier : src/ressources/configurations/");
@@ -267,6 +273,16 @@ public class UtilMenu {
         return reseau ;
     }
 
+    /**
+     * Vérifie le nombre d'arguments rajouté dans le terminal 
+     * via la ligne de commande pour exécuter le programme
+     * Si il y a un seul argument, ouvre le menu 1 de création manuel de réseau,
+     * si il y a deux arguments, ouvre le menu 3 d'optimisation automatique de réseau.
+     * @param reseau le réseau vide qu'on va remplir via un fichier ou à la main
+     * @param sc le scanner qui va prendre tout les choix de l'utilisateur
+     * @param args les arguments écrit sur la ligne de commande dans le terminal
+     * @throws ArgumentsException
+     */
     public static void verifArguments(Reseau reseau, Scanner sc, String[] args) throws ArgumentsException{
         switch (args.length){
             case 1 :
@@ -293,6 +309,11 @@ public class UtilMenu {
         }        
     }
 
+    /**
+     * Vérifie si le lambda écrit en argument est un lambda valide
+     * @param lambda le lambda écrit dans la ligne de commande du terminal
+     * @return true si le lambda est valide, false sinon
+     */
     private static boolean verifLambda(String lambda){
         try {
             int nombre = Integer.parseInt(lambda);
@@ -306,6 +327,11 @@ public class UtilMenu {
         }
     }
 
+    /**
+     * permet d'optimiser le réseau via notre algorithme de résolution d'affectation
+     * @param reseau le réseau dont on veut trouver une solution plus optimale
+     * @return le réseau optimiser
+     */
     public static Reseau optimiserReseau(Reseau reseau){
         reseau = Algorithme.resoudreReseau(reseau, Algorithme.epsilonInit);
         try {
