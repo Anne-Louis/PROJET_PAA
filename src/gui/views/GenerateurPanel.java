@@ -21,9 +21,9 @@ import main.components.Generateur;
  */
 public class GenerateurPanel extends VBox {
 
-    private Label titreLabel = new Label("Formulaire Générateur :");
+    private Label titreLabel = new Label("Ajouter un Generateur :");
     private Label nomLabel = new Label("Nom");
-    private Label capaciteLabel = new Label("Capacité en KW");
+    private Label capaciteLabel = new Label("Capacite en KW");
 
     private TextField nomTextField = new TextField("nouveau Generateur");
     private TextField capaciteTextField = new TextField("0.0");
@@ -56,7 +56,7 @@ public class GenerateurPanel extends VBox {
         geneListView.setItems(generateurs);
         geneListView.setPrefSize(400, 100);
         VBox rightBox = new VBox(5);
-        rightBox.getChildren().addAll(new Label("Générateurs ajoutés"), geneListView);
+        rightBox.getChildren().addAll(new Label("Generateurs ajoutes"), geneListView);
 
         HBox contenu = new HBox(30, form, rightBox);
         contenu.setAlignment(Pos.CENTER_LEFT);
@@ -81,8 +81,8 @@ public class GenerateurPanel extends VBox {
             capaciteTextField.setText("0.0");
 
         } catch (NumberFormatException ex) {
-            System.out.println("Capacité invalide");
-            Alerte.showAlert(AlertType.INFORMATION,"Champs vide", "La capcité doit etre un nombre");
+            System.out.println("Capacite invalide");
+            Alerte.showAlert(AlertType.INFORMATION,"Champs vide", "La capcite doit etre un nombre");
         }
     }
 

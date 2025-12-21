@@ -52,7 +52,7 @@ public class ParseFile {
                     } else if (matcherConnexion.matches()) {
                         traiterConnexion(reseau, matcherConnexion, ligneNum, ligne);
                     } else {
-                        System.err.println("Warning ligne " + ligneNum + ": Format non reconnu - " + ligne);
+                        System.err.println("Erreur ligne " + ligneNum + ": Format non reconnu - " + ligne);
                     }
                     
                 } catch (Exception e) {
@@ -63,9 +63,9 @@ public class ParseFile {
             return reseau;
             
         } catch (FileNotFoundException e) {
-            throw new ImportException("Fichier non trouvé: " + cheminFichier, e);
+            throw new ImportException("Fichier non trouve: " + cheminFichier, e);
         } catch (IOException e) {
-            throw new ImportException("Erreur d'entrée/sortie lors de la lecture du fichier: " + cheminFichier, e);
+            throw new ImportException("Erreur d'entree/sortie lors de la lecture du fichier: " + cheminFichier, e);
         }
     }
     
@@ -117,7 +117,7 @@ public class ParseFile {
         }
         
         if (!connexionReussie) {
-            System.err.println("Warning ligne " + ligneNum + ": Connexion invalide - " + ligne);
+            System.err.println("Erreur ligne " + ligneNum + ": Connexion invalide - " + ligne);
         }
     }
     
@@ -163,7 +163,7 @@ public class ParseFile {
                     return false;
                 }
                 else if(matcherMaison.matches() && (nbConnexion != 0 || nbGenerateur == 0)){
-                    System.err.println("Erreur d'ordre. Maison vant generateur ou apres connexion  \nligne " + ligneNum+ ": " + ligne);
+                    System.err.println("Erreur d'ordre. Maison avant generateur ou apres connexion  \nligne " + ligneNum+ ": " + ligne);
                     return false;
                 }
                 else if(matcherConnexion.matches() && (nbGenerateur == 0 || nbMaison == 0) ){

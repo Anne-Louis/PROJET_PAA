@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 
 /**
  * Conteneur principal de l'application Reseau
- * structure et place chaque les differents panneux
+ * structure et place chaque les differents panneaux
  */
 public class MainWindows extends VBox {
 

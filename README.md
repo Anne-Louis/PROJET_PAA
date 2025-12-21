@@ -19,6 +19,32 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 
 - Calculer le coût d'une solution et le minimiser.
 
+## Point d'entrée du projet 
+
+Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`. Il faudra ajouter des arguments pour pouvoir lancer le programme.
+
+## Comment Exécuter
+
+**Les verions recommandées :**
+- Java (JDK 21.0.6.7)
+- Javafx (jfx.version : 21.0.9)
+- JUnit5 (5.1.13.0)
+
+1. Clonez ce dépôt.
+2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
+3. Exécutez la commande pour la compilation :
+`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
+
+4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *le nom du fichier* + *la valeur de lambda*.
+(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier, la valeur de Lambda doit être supérieure ou égale à 0).
+
+5. (Optionnel) Si l'erreur : 
+`Graphics Device initialization failed for : d3d, sw`
+`Error initializing QuantumRenderer: no suitable pipeline found` 
+se produit lors du lancement de l'interface graphique, après avoir choisi l'option correspondante dans le menu, une solution possible est de récupérer les 4 fichiers .ddl dans le dossier src/ressources/solutionJavaFx et de les ajouter dans le dossier bin de votre jdk.
+Une explication de chaque fichier est donné dans l'arborescence du projet.
+Il s'agit de fichier natifs au sdk de JavaFx.
+
 ## Fonctionnalités (Partie 2)
 
 Le programme se lance via le terminal avec des arguments (nom de fichier, lambda) dans la ligne de commande. La présence d'une valeur pour le lambda est obligatoire, la présence d'un fichier n'est pas obligatoire.
@@ -28,6 +54,7 @@ En fonction du nombre d'arguments, un menu différent s'ouvre :
 
 **Menu création de réseau**
 
+- Ouvrir l'interface graphique
 - Ajouter un générateur
 - Ajouter une maison
 - Ajouter une connexion entre une maison et un générateur
@@ -37,6 +64,7 @@ En fonction du nombre d'arguments, un menu différent s'ouvre :
 **Menu optimisation du réseau**
 
 Une fois le réseau créé ou chargé depuis un fichier :
+- Ouvrir l'interface graphique
 - Optimiser via un algorithme le coût du réseau
 - Sauvegarder le réseau dans un fichier
 - Quitter le programme
@@ -61,6 +89,19 @@ L'algorithme optimise le réseau en faisant une reconstruction à chaque itérat
 
 ```
 src/
+ ├── gui/
+ │    ├── controllers/
+ │    │    └── Controleur.java                        # Relie l'interface graphique et le réseau
+ │    ├── main/
+ │    |    └── AppUI.java                             # Point d'entrée de javaFX
+ │    ├── views/
+ │    │    ├── AffichagePanel.java                    # Panneau d'affichage des options du réseau
+ │    │    ├── Alerte.java                            # Gestion des alertes de l'interface graphique
+ │    │    ├── ConnexionPanel.java                    # Panneau de création des connexions
+ │    │    ├── GenerateurPanel.java                   # Panneau de création des générateurs
+ │    │    ├── MainWindows.java                       # Panneau principal
+ │    │    ├── MaisonPanel.java                       # Panneau de création des maisons
+ │    │    └── ReseauPanel.java                       # Panneau de gestion du réseau
  ├── main/
  │    ├── algorithmes/
  │    │    ├── Algorithme.java                        # Algorithme d'optimisation du coût
@@ -96,38 +137,22 @@ src/
  |    |     ---
  │    ├── modelisations/                   
  │    │    ├── modelisation1.pdf                      # Première modélisation diagramme de classes
- │    │    └── modelisation2.jpg                      # Deuxième modélisation diagramme de classes
- │    └── solutions
- |         ├── solution1.txt                          # Fichier contenant une solution
- │         └── solution2.txt                          # Fichier contenant une solution     
- |          ---      
+ │    │    ├── modelisation2.jpg                      # Deuxième modélisation diagramme de classes
+ │    │    └── pseudo_code_alogrithme.pdf             # Pseudo code de l'algorithme implémenté
+ │    ├── solutions
+ |    |    ├── solution1.txt                          # Fichier contenant une solution
+ │    |    └── solution2.txt                          # Fichier contenant une solution   
+ |    |     ---  
+ │    └── solutionsJavaFx 
+ │    |    ├── glass.ddl                              # DDL native interface graphique de bas niveau
+ │    |    ├── javafx_font.ddl                        # DDL native rendu des polices
+ │    |    ├── prism_d3d.ddl                          # DDL native rendu Direct3D
+ │    |    └── prism_sw.ddl                           # DDL native rend Software
  └── test/
       └── components/                                 # Test unitaire
       └── menus/                                      # Test unitaire
 
 ```
-
-## Point d'entrée du projet 
-
-Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`.
-
-**Comment Exécuter**
-
-
-Assurez-vous d'avoir Java installé sur votre système.
-
-
-**Les verions recommandées :**
-- Java (JDK 25)
-- Javafx (jfx.version : 25.0.1)
-- JUnit5 (5.1.13.0)
-
-1. Clonez ce dépôt.
-2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande pour la compilation :
-`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
-
-4. Puis la commande pour l'exécution du programme : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *la valeur de lambda* + *le nom complet du fichier*.
 
 
 ## Équipe de développement

@@ -22,11 +22,11 @@ public class Menu2 {
         boolean fin = false ;
 
         while (!fin){
-            System.out.println("-------------------- Gestion réseau --------------------");
-            System.out.println("----------- Utilisation d'un réseau (Menu 2) ---------");
-            System.out.println("1) calculer le coût du réseau électrique actuel;") ;
+            System.out.println("-------------------- Gestion reseau --------------------");
+            System.out.println("----------- Utilisation d'un reseau (Menu 2) ---------");
+            System.out.println("1) calculer le cout du reseau electrique actuel;") ;
             System.out.println("2) modifier une connexion;") ;
-            System.out.println("3) afficher le réseau;");
+            System.out.println("3) afficher le reseau;");
             System.out.println("4) fin.") ;
             System.out.println("--------------------------------------------------------");
 
@@ -35,7 +35,7 @@ public class Menu2 {
 
             switch(nb){
                 case 1 :
-                    System.out.println("Le coût du réseau électrique actuel est de : " + reseau.calculerCoutReseau() + " (La valeur de la sévérité de la pénalisation est de 10)");
+                    System.out.println("Le cout du reseau electrique actuel est de : " + reseau.calculerCoutReseau() + " (La valeur de la severite de la penalisation est de 10)");
                     break ;
                 case 2 :
                     UtilMenu.modifierConnexion(reseau, sc);
@@ -45,7 +45,7 @@ public class Menu2 {
                     break ;
                 case 4 :
                     fin = true ;
-                    System.out.println("Merci d'avoir utilisé ce programme !!!") ;
+                    System.out.println("Merci d'avoir utilise ce programme !!!") ;
                     break ;
                 default :
                     System.out.println("Ce n'est pas un choix valide !");

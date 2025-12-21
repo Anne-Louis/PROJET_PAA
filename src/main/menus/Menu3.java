@@ -23,17 +23,17 @@ public class Menu3 {
      * @throws InvalideReseauException 
      */
     public static void menu3(Reseau reseau, Scanner sc){
-        System.out.println("Le réseau a bien été chargé : ");
+        System.out.println("Le reseau a bien ete charge : ");
         System.out.println(reseau);
-        System.out.println("Le coût du réseau est : " + reseau.calculerCoutReseau());
+        System.out.println("Le cout du reseau est : " + reseau.calculerCoutReseau());
 
         boolean fin = false ;
 
         while (!fin){
-            System.out.println("-------------------- Gestion réseau --------------------");
-            System.out.println("----------- Optimisation d'un réseau (Menu 3) ---------");
-            System.out.println("0) Utiliser une interface graphique ;");
-            System.out.println("1) résolution automatique ;") ;
+            System.out.println("-------------------- Gestion reseau --------------------");
+            System.out.println("----------- Optimisation d'un reseau (Menu 3) ---------");
+            System.out.println("0) utiliser une interface graphique ;");
+            System.out.println("1) reseolution automatique ;") ;
             System.out.println("2) sauvegarder la solution actuelle ;") ;
             System.out.println("3) fin.");
             System.out.println("--------------------------------------------------------");
@@ -45,6 +45,7 @@ public class Menu3 {
                 case 0 :
                     Controleur.setReseau(reseau);
                     AppUI.main(null);
+                    break ;
                 case 1 :
                     reseau = UtilMenu.optimiserReseau(reseau);
                     break ;
@@ -53,7 +54,7 @@ public class Menu3 {
                     break ;
                 case 3 :
                     fin = true;
-                    System.out.println("Merci d'avoir utilisé ce programme !!!") ;
+                    System.out.println("Merci d'avoir utilise ce programme !!!") ;
                     break;
                 default :
                     System.out.println("Ce n'est pas un choix valide !");

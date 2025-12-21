@@ -16,9 +16,9 @@ import main.components.Maison;
  * Panel de création de connexion générateur–maison.
  */
 public class ConnexionPanel extends VBox {
-    private Label titreForm =  new Label("Formulaire de Connexion :");
+    private Label titreForm =  new Label("Ajouter une Connexion :");
 
-    private Label choixGenLabel = new Label("Générateur");
+    private Label choixGenLabel = new Label("Generateur");
     private Label choixMaisonLabel = new Label("Maison");
 
     private static ComboBox<Generateur> generateurBox = new ComboBox<>();
@@ -76,7 +76,7 @@ public class ConnexionPanel extends VBox {
             Maison m = maisonBox.getValue();
             Controleur.connecter(m, generateurBox.getValue());
             maisonBox.getItems().remove(m);
-            Alerte.showAlert(AlertType.INFORMATION, "Connexion reussie", "Connexion ajoutée");
+            Alerte.showAlert(AlertType.INFORMATION, "Connexion reussie", "Connexion ajoutee");
         }
     }
 

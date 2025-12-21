@@ -134,7 +134,7 @@ public class Reseau {
         List <Maison> maisonsInvalides = new ArrayList<>();
 
         if (this.generateurs.size() == 0 || this.maisons.size() == 0){
-            throw new InvalideReseauException("Le réseau est vide");
+            throw new InvalideReseauException("Le reseau est vide");
         }
         for (Generateur gen : this.generateurs){
             totalCapacite += gen.getCapacite();
@@ -155,13 +155,13 @@ public class Reseau {
             for (Maison msnI : maisonsInvalides){
                 System.out.println("La maison : " + msnI.getNom() + " n'a pas le bon nombre de connexions !");
             }
-            throw new InvalideReseauException("maison(s) connectée(s) à aucun ou plusieurs génerateurs");
+            throw new InvalideReseauException("maison(s) connectee(s) a aucun ou plusieurs generateurs");
         }
 
         if (totalCapacite >= totalConsommation){
             return true;
         } else {
-            throw new  InvalideReseauException("La consommation d'énergie dépasse la production");
+            throw new  InvalideReseauException("La consommation d'energie depasse la production");
         }
     } 
 
