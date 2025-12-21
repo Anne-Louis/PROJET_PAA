@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Scanner;
-import gui.main.AppUI;
 
 import main.components.Reseau;
 import main.exceptions.ArgumentsException;
@@ -9,7 +8,6 @@ import main.menus.UtilMenu;
 
 public class Main {
     public static void main(String[] args){
-        AppUI.main(args);
         Reseau reseau = new Reseau();
         Scanner sc = new Scanner(System.in);
         try {

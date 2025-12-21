@@ -1,5 +1,6 @@
 package gui.main;
 
+import gui.controllers.Controleur;
 import gui.views.MainWindows;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -16,13 +17,15 @@ public class AppUI extends Application {
     @Override
     public void start(Stage primaryScene) throws Exception {
         MainWindows mainWdws = new MainWindows();
+        Controleur.updateWindows();
 
         Scene scene = new Scene(mainWdws);
 
-        primaryScene.setTitle("Reseau");
+        primaryScene.setTitle("Reseau électrique");
         primaryScene.setScene(scene);
         primaryScene.sizeToScene();
         primaryScene.show();
+        primaryScene.centerOnScreen();
     }
 
     /**

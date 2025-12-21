@@ -25,8 +25,8 @@ public class GenerateurPanel extends VBox {
     private Label nomLabel = new Label("Nom");
     private Label capaciteLabel = new Label("Capacité en KW");
 
-    private TextField nomTextField = new TextField("Generateur1");
-    private TextField capaciteTextField = new TextField("60");
+    private TextField nomTextField = new TextField("nouveau Generateur");
+    private TextField capaciteTextField = new TextField("0.0");
 
     private Button ajouterButton = new Button("Ajouter");
 
@@ -77,8 +77,8 @@ public class GenerateurPanel extends VBox {
             
             generateurs.add(Controleur.ajouterGenerateur(nom, capacite));
 
-            nomTextField.clear();
-            capaciteTextField.clear();
+            nomTextField.setText("nouveau Generateur");
+            capaciteTextField.setText("0.0");
 
         } catch (NumberFormatException ex) {
             System.out.println("Capacité invalide");
@@ -118,7 +118,7 @@ public class GenerateurPanel extends VBox {
         nomLabel.setStyle("-fx-font-weight: bold;");
         capaciteLabel.setStyle("-fx-font-weight: bold;");
 
-        nomTextField.setPrefWidth(120);
+        nomTextField.setPrefWidth(130);
         capaciteTextField.setPrefWidth(80);
 
         ajouterButton.setStyle(

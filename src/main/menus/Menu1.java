@@ -1,6 +1,9 @@
 package main.menus;
 
 import java.util.Scanner;
+
+import gui.controllers.Controleur;
+import gui.main.AppUI;
 import main.components.Reseau;
 import main.exceptions.InvalideReseauException;
 
@@ -27,6 +30,7 @@ public class Menu1 {
         while (!fin){
             System.out.println("-------------------- Gestion réseau --------------------");
             System.out.println("------------ Création d'un réseau (Menu 1) -----------");
+            System.out.println("0) utiliser une interface graphique ;");
             System.out.println("1) ajouter un générateur;") ;
             System.out.println("2) ajouter une maison;") ;
             System.out.println("3) ajouter une connexion entre une maison et un générateur existants;");
@@ -38,6 +42,9 @@ public class Menu1 {
             sc.nextLine();
 
             switch(nb){
+                case 0 :
+                    Controleur.setReseau(reseau);
+                    AppUI.main(null);
                 case 1 : 
                     UtilMenu.creerGenerateur(reseau, sc);
                     break ;

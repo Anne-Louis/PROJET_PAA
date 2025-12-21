@@ -134,4 +134,9 @@ public class Generateur {
     public double calculTauxUtilisation(){
         return calculCharge()/capacite ;
     }
+    
+    @Override
+    public String toString() {
+        return nom + "-" + capacite +" KW";
+    }
 }

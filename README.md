@@ -29,8 +29,10 @@ Assurez-vous d'avoir Java installé sur votre système.
 
 1. Clonez ce dépôt.
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande : javac -d bin src/*
-4. Puis la commande : java -cp bin src/main/Main.java
+3. Exécutez la commande pour la compilation :
+`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
+
+4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + la valeur de lambda + le nom du fichier.
 
 ## Fonctionnalités (Partie 2)
 
@@ -53,6 +55,9 @@ Une fois le réseau créé ou chargé depuis un fichier :
 - Optimiser via un algorithme le coût du réseau
 - Sauvegarder le réseau dans un fichier
 - Quitter le programme
+
+**Description de l'algorithme d'optimisation**
+L'algorithme optimise le réseau en faisant une allocatio
 
 
 ## Structure du projet 

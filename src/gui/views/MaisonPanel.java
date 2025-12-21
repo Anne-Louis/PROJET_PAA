@@ -26,7 +26,7 @@ public class MaisonPanel extends VBox {
     private Label nomLabel = new Label("Nom");
     private Label typeLabel = new Label("Catégorie");
 
-    private TextField nomTextField = new TextField("maison1");
+    private TextField nomTextField = new TextField("nouvelle maison");
     private ComboBox<String> typeBox = new ComboBox<>();
 
     private Button ajouterButton = new Button("Ajouter");
@@ -86,7 +86,7 @@ public class MaisonPanel extends VBox {
         Maison m = Controleur.ajouterMaison(nom, NiveauConsommation.valueOf(categorie));
         if (m != null) maisons.add(m);
 
-        nomTextField.clear();
+        nomTextField.setText("nouvelle maison");
         typeBox.setValue("NORMALE");
     }
 

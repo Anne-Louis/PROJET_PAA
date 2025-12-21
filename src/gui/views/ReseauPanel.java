@@ -76,8 +76,8 @@ public class ReseauPanel extends VBox {
     private void appliquerStyle() {
 
         this.setStyle(
-            "-fx-background-color: #d6d8d6;" +
-            "-fx-border-color: #c7deefff;" +
+            "-fx-background-color: #d4d6d4ff;" +
+            "-fx-border-color: #a8aeb2ff;" +
             "-fx-border-width: 4;" +
             "-fx-border-radius:5 ;" +
             "-fx-background-radius: 5;"
@@ -89,7 +89,7 @@ public class ReseauPanel extends VBox {
         );
 
         validerReseauBtn.setStyle(
-            "-fx-background-color: #4CAF50;" +
+            "-fx-background-color: #3b7c3dff;" +
             "-fx-font-weight: bold;" +
             "-fx-text-fill: white;" +
             "-fx-font-size: 14px;"+
@@ -97,21 +97,21 @@ public class ReseauPanel extends VBox {
         );
 
         calculerCoutBtn.setStyle(
-            "-fx-background-color: #1976D2;" +
+            "-fx-background-color: #0d559dff;" +
             "-fx-font-weight: bold;" +
             "-fx-font-size: 14px;"+
             "-fx-text-fill: white;"
         );
 
         afficherReseauBtn.setStyle(
-            "-fx-background-color: #6D4C41;" +
+            "-fx-background-color: #6f3a28ff;" +
             "-fx-font-weight: bold;" +
             "-fx-font-size: 14px;"+
             "-fx-text-fill: white;"
         );
 
         sauvegarderBtn.setStyle(
-            "-fx-background-color: #455A64;" +
+            "-fx-background-color: #3f5a66ff;" +
             "-fx-font-weight: bold;" +
             "-fx-font-size: 14px;"+
             "-fx-text-fill: white;"

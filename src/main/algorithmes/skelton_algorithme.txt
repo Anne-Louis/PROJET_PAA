@@ -1,36 +1,41 @@
-    Input: 
-        M = liste des maisons
-        G = liste des générateurs
+Input: 
+    S = réseau initial
+    epsilon = 0.5 //paramètre de régulation
+Output: 
+    minReseau = réseau optimisé
 
-    Output: 
-        R = réseau avec connexions allouées
+1. minReseau <- copie de S
+2. meilleurCout <- coût(minReseau)
 
-    Algorithme:
+3. While epsilon > 0.01:
+    3.1 courant <- copie de minReseau
+    3.2 Supprimer toutes les connexions de courant
+    3.3 Trier les maisons de courant par consommation décroissante
+    3.4 maisonsNonAllouees <- []
 
-    1. Supprimer toutes les connexions initiales des generateurs
+    3.5 For chaque maison m dans courant:
+        3.5.1 Calculer moyenneTaux des générateurs
+        3.5.2 Trier générateurs par capacité restante décroissante
+        3.5.3 alloue <- faux
 
-    2. Trier les maisons M par consommation décroissante
+        3.5.4 For chaque générateur g:
+            If (capacité restante de g >= consommation de m) AND (|taux(g) - moyenneTaux| <= epsilon):
+                Allouer m à g
+                alloue <- vrai
+                Break
 
-    3. Pour chaque maison m dans M:
-        
-        a. Calculer la moyenne des taux actuels des générateurs :
-        MoyenneTaux = (1 / |G|) * somme( Taux(g) pour g in G )
+        3.5.5 If alloue = faux:
+            Ajouter m à maisonsNonAllouees
 
-        b. Créer une liste des générateurs triée par capacité disponible décroissante
+    3.6 For chaque maison m dans maisonsNonAllouees:
+        Tester toutes allocations possibles
+        Choisir celle minimisant le coût
+        Mettre à jour courant
 
-        c. Pour chaque générateur g dans cette liste:
+    3.7 If coût(courant) < meilleurCout:
+        minReseau <- courant
+        meilleurCout <- coût(courant)
 
-            i. Si g peut alimenter m (capacité restante >= consommation de m) 
-            ET |Taux(g) - MoyenneTaux| <= ε  (règle de régulation)
-                Alors:
-                    - Allouer la maison m au générateur g
-                    - Mettre à jour les taux
-                    - Sortir de la boucle sur les générateurs
+    3.8 epsilon <- epsilon * 0.99
 
-        d. Si aucune allocation possible selon la règle:
-            - Ignorer la règle de régulation (ε) et allouer au générateur de plus grande capacité restante disponible
-
-    4. Fin pour
-
-    5. Retourner le réseau avec les nouvelles connexions
-
+4. Return minReseau

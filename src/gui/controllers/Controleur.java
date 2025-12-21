@@ -1,6 +1,8 @@
 package gui.controllers;
 import java.io.File;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import gui.views.AffichagePanel;
@@ -168,24 +170,25 @@ public class Controleur {
     public static void sauvegarderReseau(Stage stage){
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Sauvegarde de l'instance ");
-        dialog.setContentText("Saisie le chemin complet du fichier sans extantion (ex: instance1) ");
+        dialog.setContentText("Saisie le chemin complet du fichier sans extantion (ex: solution1) ");
         
         Optional<String> textLamda = dialog.showAndWait();
-        String fileName = "ReseauOptimisé";
         
+        String fileName = "ReseauOptimisé";
         if(textLamda.isPresent() && !textLamda.get().isEmpty()){
                 fileName = textLamda.get();
-        }
-        try{
-            Alerte.showAlert(AlertType.CONFIRMATION, "Sauvegarde", "l'instance sera enregister dans le fichier: src/ressources/solutions/" + fileName + ".txt");
-            main.io.SauvegardeReseau.sauvegardeReseau(reseau, fileName);
-            
-            AffichagePanel.afficherTexte("Le fichier est enregistré");
-        }catch(FileAlreadyExistsException e){
-            Alerte.showAlert(AlertType.ERROR, "Fichier reseau", e.getMessage());
-            AffichagePanel.afficherTexte(e.getMessage());
-        }catch(Exception e){
-            Alerte.showAlert(AlertType.ERROR, "Fichier reseau", "Une erreur de sauvegarde de la solution est survenue");   
+        
+            try{
+                Alerte.showAlert(AlertType.INFORMATION, "Sauvegarde", "l'instance sera enregister dans le fichier: src/ressources/solutions/" + fileName + ".txt");
+                main.io.SauvegardeReseau.sauvegardeReseau(reseau, fileName);
+                
+                AffichagePanel.afficherTexte("Le fichier est enregistré");
+            }catch(FileAlreadyExistsException e){
+                Alerte.showAlert(AlertType.ERROR, "Fichier reseau", e.getMessage());
+                AffichagePanel.afficherTexte(e.getMessage());
+            }catch(Exception e){
+                Alerte.showAlert(AlertType.ERROR, "Fichier reseau", "Une erreur de sauvegarde de la solution est survenue");   
+            }
         }
     }
     
@@ -194,5 +197,32 @@ public class Controleur {
      */
     public static void afficherReseau(){
         AffichagePanel.afficherTexte(reseau.toString());
+    }
+
+    /**
+     * Met à jour l’ensemble des composants de l’interface graphique
+     * en synchronisant leur contenu avec l’état actuel du réseau.
+     * Elle doit être appelée après toute modification du réseau.
+     */
+    public static void updateWindows() {
+        MaisonPanel.setMaisons(reseau.getMaisons());
+        GenerateurPanel.setgenerateurs(reseau.getGenerateurs());
+        ConnexionPanel.setGenerateurs(reseau.getGenerateurs());
+
+        List<Maison> msnList = new ArrayList<>();
+        for (Maison m : reseau.getMaisons())
+            if (m.getConnexion() == null)
+                msnList.add(m);
+
+        ConnexionPanel.setMaisons(msnList);
+    }
+
+
+    /**
+     * Met à jour le réseau utilisé par le contrôleur.
+     * @param _reseau le nouvel objet à associer au contrôleur
+     */
+    public static void setReseau(Reseau _reseau) {
+        Controleur.reseau = _reseau;
     }
 }

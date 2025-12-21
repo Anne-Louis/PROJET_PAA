@@ -13,14 +13,13 @@
             "name": "Test simple",
             "request": "launch",
             "mainClass": "main.Main",
-            "args": "instance1 10",
-            "vmArgs": "--module-path C:/GeetSpace/javafx/lib --add-modules javafx.controls,javafx.fxml"
+            "args": "instance1 10"
         }
     ],
     "java.project.sourcePaths": [
         "src"
     ],
     "java.project.referencedLibraries": [
-        "C:\\GeetSpace\\javafx\\lib\\*"
+        "..\\lib\\*"
     ]
 }
