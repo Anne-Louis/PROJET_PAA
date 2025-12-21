@@ -20,7 +20,7 @@ public class Main {
         try {
             UtilMenu.verifArguments(reseau, sc, args);
         } catch (ArgumentsException e){
-            e.printStackTrace();
+            System.out.println(e);
         } finally {
             sc.close();
         }

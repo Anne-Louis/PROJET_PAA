@@ -297,7 +297,7 @@ public class UtilMenu {
                         reseau = chargerFichier(reseau, args[0], Integer.parseInt(args[1]));
                         Menu3.menu3(reseau, sc);
                     } catch(ImportException e){
-                        System.out.println("Le menu de creation de réseau sera ouvert a la place");
+                        System.out.println("Le menu de creation de reseau sera ouvert a la place");
                         Menu1.menu1(reseau, sc);
                     } catch (InvalideReseauException e){
                         System.out.println("Le reseau n'est pas valide\n"+ e.getMessage());
@@ -322,7 +322,7 @@ public class UtilMenu {
             }
             return true ;
         } catch (NumberFormatException e){
-            System.out.println("Le lambda doit etre un entier superieur ou egale à 0 !");
+            System.out.println("Le lambda doit etre un entier superieur ou egale a 0 !");
             return false ;
         }
     }
