@@ -25,14 +25,18 @@ Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous po
 
 ## Comment Exécuter
 
-Assurez-vous d'avoir Java 21 et JavaFX 21 installé sur votre système.
+**Les verions recommandées :**
+- Java (JDK 21.0.6.7)
+- Javafx (jfx.version : 21.0.9)
+- JUnit5 (5.1.13.0)
 
 1. Clonez ce dépôt.
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
 3. Exécutez la commande pour la compilation :
 `javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
 
-4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + le nom du fichier + la valeur de lambda.
+4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *le nom du fichier* + *la valeur de lambda*.
+(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier, la valeur de Lambda doit être supérieure ou égale à 0).
 
 5. (Optionnel) Si l'erreur : 
 `Graphics Device initialization failed for : d3d, sw`
@@ -149,28 +153,6 @@ src/
       └── menus/                                      # Test unitaire
 
 ```
-
-## Point d'entrée du projet 
-
-Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`.
-
-**Comment Exécuter**
-
-
-Assurez-vous d'avoir Java installé sur votre système.
-
-
-**Les verions recommandées :**
-- Java (JDK 25)
-- Javafx (jfx.version : 25.0.1)
-- JUnit5 (5.1.13.0)
-
-1. Clonez ce dépôt.
-2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande pour la compilation :
-`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
-
-4. Puis la commande pour l'exécution du programme : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *la valeur de lambda* + *le nom complet du fichier*.
 
 
 ## Équipe de développement
