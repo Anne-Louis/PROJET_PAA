@@ -1,0 +1,11 @@
+generateur(gen1,60.0).
+generateur(gen2,80.0).
+generateur(gen3,20.0).
+maison(maison1,NORMALE).
+maison(maison2,BASSE).
+maison(maison3,FORTE).
+maison(maison4,NORMALE).
+connexion(gen1,maison1).
+connexion(gen2,maison2).
+connexion(gen2,maison4).
+connexion(gen3,maison3).

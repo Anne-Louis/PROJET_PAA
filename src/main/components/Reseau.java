@@ -266,7 +266,7 @@ public class Reseau {
         this.generateurs = gens;
     }
 
-    public void setLampda(int lampda){
+    public void setLambda(int lampda){
         this.lampda = lampda ;
     }
 

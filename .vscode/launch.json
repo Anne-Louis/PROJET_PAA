@@ -1,9 +1,13 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+        {
+            "type": "java",
+            "name": "AppUI",
+            "request": "launch",
+            "mainClass": "gui.main.AppUI",
+            "projectName": "PROJET_PAA_a803772b"
+        },
         {
             "type": "java",
             "name": "Test simple",
@@ -11,5 +15,11 @@
             "mainClass": "main.Main",
             "args": "instance1 10"
         }
+    ],
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.referencedLibraries": [
+        "..\\lib\\*"
     ]
 }

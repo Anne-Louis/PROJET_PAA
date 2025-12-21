@@ -1,6 +1,9 @@
 package main.menus;
 
 import java.util.Scanner;
+
+import gui.controllers.Controleur;
+import gui.main.AppUI;
 import main.components.Reseau;
 import main.exceptions.InvalideReseauException;
 
@@ -29,6 +32,7 @@ public class Menu3 {
         while (!fin){
             System.out.println("-------------------- Gestion réseau --------------------");
             System.out.println("----------- Optimisation d'un réseau (Menu 3) ---------");
+            System.out.println("0) Utiliser une interface graphique ;");
             System.out.println("1) résolution automatique ;") ;
             System.out.println("2) sauvegarder la solution actuelle ;") ;
             System.out.println("3) fin.");
@@ -38,6 +42,9 @@ public class Menu3 {
             sc.nextLine();
 
             switch(nb){
+                case 0 :
+                    Controleur.setReseau(reseau);
+                    AppUI.main(null);
                 case 1 :
                     reseau = UtilMenu.optimiserReseau(reseau);
                     break ;
