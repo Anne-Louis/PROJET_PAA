@@ -12,6 +12,8 @@ import main.components.Reseau;
  *   <li>Afficher le réseau complet.</li>
  * </ul>
  * Le programme se termine lorsque l'utilisateur choisit l'option 4.
+ * Cette classe correspond à la partie 1 du projet.
+ * ELLE N'EST PLUS UTILISEE !!!
  */
 public class Menu2 {
     /**

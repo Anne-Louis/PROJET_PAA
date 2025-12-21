@@ -11,6 +11,15 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 - **Connexions** reliant chaque maison à un générateur unique.
 
 
+## Objectifs du projet
+
+- Représenter un réseau simplifié avec uniquement des générateurs et des maisons.
+
+- Simuler les connections possibles entre les générateurs et les maisons.
+
+- Calculer le coût d'une solution et le minimiser.
+
+
 ## Fonctionnalités (Partie 2)
 
 Le programme se lance via le terminal avec des arguments (nom de fichier, lambda) dans la ligne de commande. La présence d'une valeur pour le lambda est obligatoire, la présence d'un fichier n'est pas obligatoire.
@@ -120,14 +129,6 @@ src/
 
 ```
 
-## Objectifs du projet
-
-- Représenter un réseau simplifié avec uniquement des générateurs et des maisons.
-
-- Simuler les connections possibles entre les générateurs et les maisons.
-
-- Calculer le coût d'une solution et le minimiser.
-
 ## Point d'entrée du projet 
 
 Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`. Il faudra ajouter des arguments pour pouvoir lancer le programme.
@@ -142,10 +143,15 @@ Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous po
 1. Clonez ce dépôt.
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
 3. Exécutez la commande pour la compilation :
-`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
+```
+javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java
+```
 
-4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *le nom du fichier* + *la valeur de lambda*.
-(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier, la valeur de lambda doit être supérieure ou égale à 0).
+4. Puis la commande pour l'éxecution :
+```
+java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + le nom du fichier + la valeur de lambda.
+```
+(il n'est pas nécessaire d'ajouter l'extension .txt au nom du fichier,le fichier doit obligatoirement se trouver dans le dossier `src/ressources/confiugrations` la valeur de lambda doit être supérieure ou égale à 0).
 
 5. (Optionnel) Si l'erreur : 
 ```

@@ -10,16 +10,17 @@ import java.util.ArrayList;
  * équilibrant la charge des générateurs.
  */
 public class Algorithme {
+    /** Valeur représentant le niveau de tolérance du taux de dispersion d'un générateur*/
     public static double  epsilonInit = 0.5;
 
     /**
      * Alloue les maisons au générateurs par :
-     * par tri des maisons par ordres decroisante de consommation.
-     * charge en prémier les générateurs de plus grandes capacités disponible.
-     * equilibre la repartition en veillant sur l'écart entre la moyenne des taux d'utilisation des generateurs
-     * et le taux d'utilisation d'un générateur g avec une toleraran epsilon.
+     * par tri des maisons par ordre décroisant de consommation.
+     * charge en premier les générateurs de plus grandes capacités disponible.
+     * équilibre la répartition en veillant sur l'écart entre la moyenne des taux d'utilisation des generateurs
+     * et le taux d'utilisation d'un générateur g avec une tolérance epsilon.
      * @param S       le réseau à resoudre automatiquement
-     * @param epsilon la tolerance pour l'équilibrage de la repartion des charges entre les générateurs
+     * @param epsilon la tolérance pour l'équilibrage de la répartition des charges entre les générateurs
      * @return réseau optimisé
      */
     public static Reseau resoudreReseau(Reseau S, double epsilon) {

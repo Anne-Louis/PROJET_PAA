@@ -71,6 +71,8 @@ public class ParseFile {
     
     /**
      * Traite une ligne de générateur
+     * @param reseau le réseau qu'on est en train de construire via le fichier
+     * @param matcher le matcher qui utilise un pattern pour vérifier si une ligne est correcte
      */
     private static void traiterGenerateur(Reseau reseau, Matcher matcher) {
         String nom = matcher.group(1);
@@ -80,6 +82,8 @@ public class ParseFile {
     
     /**
      * Traite une ligne de maison
+     * @param reseau le réseau qu'on est en train de construire via le fichier
+     * @param matcher le matcher qui utilise un pattern pour vérifier si une ligne est correcte
      */
     private static void traiterMaison(Reseau reseau, Matcher matcher) {
         String nom = matcher.group(1);
@@ -90,6 +94,8 @@ public class ParseFile {
     
     /**
      * Traite une ligne de connexion
+     * @param reseau le réseau qu'on est en train de construire via le fichier
+     * @param matcher le matcher qui utilise un pattern pour vérifier si une ligne est correcte
      */
     private static void traiterConnexion(Reseau reseau, Matcher matcher, int ligneNum, String ligne) {
         String nom1 = matcher.group(1);

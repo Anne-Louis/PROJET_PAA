@@ -1,7 +1,7 @@
 package main.exceptions;
 
 /**
- * Exception pour les erreurs d'importation de fichiers  ^_^
+ * Exception pour les erreurs si un générateur n'existe pas
  */
 public class GenerateurInexistantException extends Exception {
     public GenerateurInexistantException(String message) {

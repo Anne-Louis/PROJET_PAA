@@ -1,7 +1,7 @@
 package main.exceptions;
 
 /**
- * Exception pour les erreurs d'importation de fichiers  ^_^
+ * Exception pour les erreurs d'importation de fichiers 
  */
 public class ImportException extends Exception {
     public ImportException(String message) {

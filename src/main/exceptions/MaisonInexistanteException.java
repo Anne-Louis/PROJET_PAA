@@ -1,7 +1,7 @@
 package main.exceptions;
 
 /**
- * Exception pour les erreurs d'importation de fichiers  ^_^
+ * Exception pour les erreurs si une maison n'existe pas
  */
 public class MaisonInexistanteException extends Exception {
     public MaisonInexistanteException(String message) {
