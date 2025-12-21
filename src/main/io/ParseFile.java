@@ -96,8 +96,9 @@ public class ParseFile {
      * Traite une ligne de connexion
      * @param reseau le réseau qu'on est en train de construire via le fichier
      * @param matcher le matcher qui utilise un pattern pour vérifier si une ligne est correcte
+     * @throws ImportException 
      */
-    private static void traiterConnexion(Reseau reseau, Matcher matcher, int ligneNum, String ligne) {
+    private static void traiterConnexion(Reseau reseau, Matcher matcher, int ligneNum, String ligne) throws ImportException {
         String nom1 = matcher.group(1);
         String nom2 = matcher.group(2);
         
@@ -124,6 +125,7 @@ public class ParseFile {
         
         if (!connexionReussie) {
             System.err.println("Erreur ligne " + ligneNum + ": Connexion invalide - " + ligne);
+            throw new ImportException("Erreur ligne " + ligneNum + ": Connexion invalide - " + ligne);
         }
     }
     

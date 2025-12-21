@@ -17,18 +17,6 @@ public class Generateur {
     private List<Connexion> maisons ;
 
     /**
-     * Crée un nouveau générateur avec un nom, une capacité et une liste de connexions existante.
-     * @param nom le nom du générateur
-     * @param capacite la capacité maximale du générateur (en kW)
-     * @param maisons la liste des connexions associées
-     */
-    public Generateur(String nom, double capacite, List <Connexion> maisons){
-        this.nom = nom ;
-        this.capacite = capacite ;
-        this.maisons = maisons ;
-    }
-
-    /**
      * Crée un nouveau générateur avec un nom et une capacité.
      * @param nom le nom du générateur
      * @param capacite la capacité maximale du générateur (en kW)

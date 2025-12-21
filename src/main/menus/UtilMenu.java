@@ -175,20 +175,19 @@ public class UtilMenu {
         Connexion con = null ;
         try {
             con = enregistrerConnexion(reseau, sc, message) ;
+            for (Connexion c : reseau.getConnexions()){
+                if (con.equals(c)){
+                    System.out.println("Cette connexion existe deja") ;
+                    return;
+                }
+            }
+            reseau.ajouterConnexion(con) ;
+            System.out.println("La connexion " + con.getGenerateur().getNom() + " " + con.getMaison().getNom() + " a bien ete cree !");
         } catch (GenerateurInexistantException e) {
             System.out.println(e);
         } catch (MaisonInexistanteException e){
             System.out.println(e);
         }
-
-        for (Connexion c : reseau.getConnexions()){
-            if (con.equals(c)){
-                System.out.println("Cette connexion existe deja") ;
-                return;
-            }
-        }
-        reseau.ajouterConnexion(con) ;
-        System.out.println("La connexion " + con.toString() + " a bien ete cree !");
     }
 
     /**
@@ -201,19 +200,19 @@ public class UtilMenu {
         Connexion con = null ;
         try {
             con = enregistrerConnexion(reseau, sc, message) ;
+            if (con == null){
+                System.out.println("Cette connexion n'existe pas !") ;
+                return false;
+            }       
+            reseau.supprimerConnexion(con);
+            System.out.println("La connexion " + con.getGenerateur().getNom() + " " + con.getMaison().getNom() + " a bien ete supprime !");
+            return true ;
         } catch (GenerateurInexistantException e) {
             System.out.println(e);
         } catch (MaisonInexistanteException e){
             System.out.println(e);
         }
-        if (con == null){
-            System.out.println("Cette connexion n'existe pas !") ;
-            return false;
-        }
-                    
-        reseau.supprimerConnexion(con);
-        System.out.println("La connexion " + con.toString() + " a bien ete modifie !");
-        return true ;
+        return false ;
     }
 
     /**
