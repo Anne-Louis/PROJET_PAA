@@ -19,21 +19,6 @@ Ce projet modélise et simule un **réseau électrique** simplifié composé de 
 
 - Calculer le coût d'une solution et le minimiser.
 
-## Point d'entrée du projet 
-
-Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`.
-
-## Comment Exécuter
-
-Assurez-vous d'avoir Java installé sur votre système.
-
-1. Clonez ce dépôt.
-2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
-3. Exécutez la commande pour la compilation :
-`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
-
-4. Puis la commande pour l'éxecution : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + la valeur de lambda + le nom du fichier.
-
 ## Fonctionnalités (Partie 2)
 
 Le programme se lance via le terminal avec des arguments (nom de fichier, lambda) dans la ligne de commande. La présence d'une valeur pour le lambda est obligatoire, la présence d'un fichier n'est pas obligatoire.
@@ -56,8 +41,20 @@ Une fois le réseau créé ou chargé depuis un fichier :
 - Sauvegarder le réseau dans un fichier
 - Quitter le programme
 
-**Description de l'algorithme d'optimisation**
-L'algorithme optimise le réseau en faisant une allocatio
+## Description de l'algorithme d'optimisation :
+L'algorithme optimise le réseau en faisant une reconstruction à chaque itération et en conservant **le réseau ayant le coût minimal obtenu** en suivant ces règles pour chaque itération :
+0. on choisit ε = 0.5, le paramètre de régulation de la distribution.
+
+1. l'allocation priorise les maisons de forte consommation.
+2. Au générateur g de grande capacité disponible restante (capacité - charge actuelle) et ayant un faible taux d'utilisation, tel que : **|tauxUtilisation(g) - tauxUtilisationMoyenne des générateurs| < ε**. *(Ceci permet de centrer les taux d'utilisation des générateurs autour de la moyenne des taux d'utilisation, ce qui minimise efficacement la distribution : |Ū - Ug|)*.
+
+3. Si aucun générateur ne peut alimenter une maison m en respectant ces conditions, alors celle-ci est rattachée au générateur de telle sorte que le coût du réseau reste minimal.
+
+4. On réduit ε à ε' afin de rechercher une autre construction de distribution faible.
+
+5. A la fin (c'est-à-dire, lorsque ε est suffisamment petit, ε < 0.01), on retourne la meilleure construction du réseau obtenu parmi l'ensemble des itérations effectuées.
+
+*Voir l'algorithme complet dans le fichier src/ressources/modélisation/pseudo_code_algorithme_heuristique.pdf et le pseudo code detaillé dans le fichier Algorithmes/skelton_algorithe.txt*
 
 
 ## Structure du projet 
@@ -109,6 +106,28 @@ src/
       └── menus/                                      # Test unitaire
 
 ```
+
+## Point d'entrée du projet 
+
+Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous pouvez trouver le point d'entrée du programme dans le fichier `Main.java`.
+
+**Comment Exécuter**
+
+
+Assurez-vous d'avoir Java installé sur votre système.
+
+
+**Les verions recommandées :**
+- Java (JDK 25)
+- Javafx (jfx.version : 25.0.1)
+- JUnit5 (5.1.13.0)
+
+1. Clonez ce dépôt.
+2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
+3. Exécutez la commande pour la compilation :
+`javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/menus/*.java`
+
+4. Puis la commande pour l'exécution du programme : `java --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp ./bin main.Main` + *la valeur de lambda* + *le nom complet du fichier*.
 
 
 ## Équipe de développement
