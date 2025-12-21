@@ -79,6 +79,6 @@ public class Maison {
     @Override
     public String toString() {
         String ConNom = (connexion != null) ? connexion.getGenerateur().getNom() : "Aucun";
-        return "Maison " + nom + " (" + niveau + ", " + getConsommation() + " kW) → Générateur : " + ConNom;
+        return "Maison " + nom + " (" + niveau + ", " + getConsommation() + " kW) → Generateur : " + ConNom;
     }
 }

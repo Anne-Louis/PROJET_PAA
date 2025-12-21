@@ -62,7 +62,7 @@ public class UtilMenu {
 				System.out.print(message);
 				res = sc.nextLine();
                 if (res.split("\\s").length != 2){
-                    throw new NombreDeTermesException("Le nombre de termes utilisés doit être de deux !");
+                    throw new NombreDeTermesException("Le nombre de termes utilises doit etre de deux !");
                 }
 				lectureOK = true;
 			} catch (NombreDeTermesException e){
@@ -79,26 +79,26 @@ public class UtilMenu {
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerGenerateur(Reseau reseau, Scanner sc){
-        String message = "Veuillez saisir le générateur à enregistrer ainsi que sa puissance (ex : G1 60) : ";
+        String message = "Veuillez saisir le generateur a enregistrer ainsi que sa puissance (ex : G1 60) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
         try {
             double cap = Double.parseDouble(ligne.split("\\s")[1]) ;
             if (cap <= 0){
-                System.out.println("Un générateur doit avoir une capacité strictement positive !");
+                System.out.println("Un generateur doit avoir une capacite strictement positive !");
                 return ;
             }
             Generateur g = reseau.trouverGenerateurParNom(nom);
             if (g != null){
                     g.setcapacite(cap);
-                    System.out.println("Le générateur " + nom + " existe déjà, sa capacité à été mise à jour : " + cap + "kW") ;
+                    System.out.println("Le generateur " + nom + " existe deja, sa capacite a ete mise à jour : " + cap + "kW") ;
                     return ;
             }
             Generateur gen = new Generateur(nom, cap);
             reseau.ajouterGenerateur(gen) ;
-            System.out.println("Le générateur " + gen.getNom() + " a bien été crée !");
+            System.out.println("Le generateur " + gen.getNom() + " a bien ete cree !");
         } catch (NumberFormatException e){
-            System.out.println("Le générateur doit avoir un nombre comme puissance !");
+            System.out.println("Le generateur doit avoir un nombre comme puissance !");
         }
     }
 
@@ -109,7 +109,7 @@ public class UtilMenu {
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerMaison(Reseau reseau, Scanner sc){
-        String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) (ex : M1 NORMAL) : ";
+        String message = "Veuillez saisir la maison a enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) (ex : M1 NORMAL) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
         try {
@@ -117,15 +117,15 @@ public class UtilMenu {
             for (Maison m : reseau.getMaisons()){
                 if (m.getNom().equals(nom)){
                     m.setConsommation(cons) ;
-                    System.out.println("La maison " + nom + " existe déjà, sa consommation à été mise à jour : " + cons) ;
+                    System.out.println("La maison " + nom + " existe deja, sa consommation a ete mise a jour : " + cons) ;
                     return ;
                 }
             }
             Maison maison = new Maison(nom, cons);
             reseau.ajouterMaison(maison) ;
-            System.out.println("La maison " + maison.getNom() + " a bien été crée !");
+            System.out.println("La maison " + maison.getNom() + " a bien ete cree !");
         } catch (IllegalArgumentException e){
-            System.out.println("Le niveau de consommation de la maison doit être : BASSE, NORMAL ou FORTE");
+            System.out.println("Le niveau de consommation de la maison doit etre : BASSE, NORMAL ou FORTE");
         }
     }
 
@@ -154,7 +154,7 @@ public class UtilMenu {
         }
 
         if (genC == null){
-            throw new GenerateurInexistantException("Le générateur n'existe pas");
+            throw new GenerateurInexistantException("Le generateur n'existe pas");
         }
         if (maiC == null){
             throw new MaisonInexistanteException("La maison n'existe pas !");
@@ -170,7 +170,7 @@ public class UtilMenu {
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerConnexion(Reseau reseau, Scanner sc){
-        String message = "Veuillez saisir la connexion à enregistrer  (ex : G1 M1 ou M1 G1) : " ;
+        String message = "Veuillez saisir la connexion a enregistrer  (ex : G1 M1 ou M1 G1) : " ;
         Connexion con = null ;
         try {
             con = enregistrerConnexion(reseau, sc, message) ;
@@ -182,12 +182,12 @@ public class UtilMenu {
 
         for (Connexion c : reseau.getConnexions()){
             if (con.equals(c)){
-                System.out.println("Cette connexion existe déjà") ;
+                System.out.println("Cette connexion existe deja") ;
                 return;
             }
         }
         reseau.ajouterConnexion(con) ;
-        System.out.println("La connexion " + con.toString() + " a bien été crée !");
+        System.out.println("La connexion " + con.toString() + " a bien ete cree !");
     }
 
     /**
@@ -211,7 +211,7 @@ public class UtilMenu {
         }
                     
         reseau.supprimerConnexion(con);
-        System.out.println("La connexion " + con.toString() + " a bien été modifié !");
+        System.out.println("La connexion " + con.toString() + " a bien ete modifie !");
         return true ;
     }
 
@@ -235,7 +235,7 @@ public class UtilMenu {
      * @param sc
      */
     public static void sauvegardeSolution(Reseau reseau, Scanner sc){
-        System.out.println("Votre fichier sera sauvegardé dans le dossier : src/ressources/solutions/");
+        System.out.println("Votre fichier sera sauvegarde dans le dossier : src/ressources/solutions/");
 
         boolean fichierSauvegarder = false ;
         while(!fichierSauvegarder){
@@ -244,7 +244,7 @@ public class UtilMenu {
                 String fichier = sc.nextLine();
                 SauvegardeReseau.sauvegardeReseau(reseau, fichier);
                 fichierSauvegarder = true ;
-                System.out.println("Votre réseau a bien été sauvegardé !");
+                System.out.println("Votre reseau a bien ete sauvegarde !");
             } catch (FileAlreadyExistsException e) {
                 System.out.println(e);
             }
@@ -258,7 +258,7 @@ public class UtilMenu {
      * @param sc
      */
     public static Reseau chargerFichier(Reseau reseau, String filePath, int lambda) throws ImportException, InvalideReseauException{
-        System.out.println("Votre fichier sera chargé depuis le dossier : src/ressources/configurations/");
+        System.out.println("Votre fichier sera charge depuis le dossier : src/ressources/configurations/");
         filePath = "src" + File.separator + "ressources" + File.separator + "configurations" + File.separator + filePath + ".txt";
         
         reseau = ParseFile.importerReseau(filePath);
@@ -281,10 +281,10 @@ public class UtilMenu {
                         reseau = chargerFichier(reseau, args[0], Integer.parseInt(args[1]));
                         Menu3.menu3(reseau, sc);
                     } catch(ImportException e){
-                        System.out.println("Le menu de création de réseau sera ouvert à la place");
+                        System.out.println("Le menu de creation de réseau sera ouvert a la place");
                         Menu1.menu1(reseau, sc);
                     } catch (InvalideReseauException e){
-                        System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
+                        System.out.println("Le reseau n'est pas valide\n"+ e.getMessage());
                     }
                 }
                 break ;
@@ -301,7 +301,7 @@ public class UtilMenu {
             }
             return true ;
         } catch (NumberFormatException e){
-            System.out.println("Le lambda doit être un entier supérieur ou égale à 0 !");
+            System.out.println("Le lambda doit etre un entier superieur ou egale à 0 !");
             return false ;
         }
     }
@@ -311,10 +311,10 @@ public class UtilMenu {
         try {
             reseau.validerReseau();
             System.out.println(reseau);
-            System.out.println("Le coût du réseau vaut : "+ reseau.calculerCoutReseau());
+            System.out.println("Le cout du reseau vaut : "+ reseau.calculerCoutReseau());
             return reseau ;
         } catch(InvalideReseauException e){
-            System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
+            System.out.println("Le reseau n'est pas valide\n"+ e.getMessage());
             return null ;
         }
     }

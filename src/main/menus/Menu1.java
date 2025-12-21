@@ -28,13 +28,13 @@ public class Menu1 {
         boolean fin = false ;
 
         while (!fin){
-            System.out.println("-------------------- Gestion réseau --------------------");
-            System.out.println("------------ Création d'un réseau (Menu 1) -----------");
+            System.out.println("-------------------- Gestion reseau --------------------");
+            System.out.println("------------ Creation d'un reseau (Menu 1) -----------");
             System.out.println("0) utiliser une interface graphique ;");
-            System.out.println("1) ajouter un générateur;") ;
+            System.out.println("1) ajouter un generateur;") ;
             System.out.println("2) ajouter une maison;") ;
-            System.out.println("3) ajouter une connexion entre une maison et un générateur existants;");
-            System.out.println("4) supprimer une connexion existante entre une maison et un générateur;");
+            System.out.println("3) ajouter une connexion entre une maison et un generateur existants;");
+            System.out.println("4) supprimer une connexion existante entre une maison et un generateur;");
             System.out.println("5) fin.") ;
             System.out.println("--------------------------------------------------------");
 
@@ -45,6 +45,7 @@ public class Menu1 {
                 case 0 :
                     Controleur.setReseau(reseau);
                     AppUI.main(null);
+                    break ;
                 case 1 : 
                     UtilMenu.creerGenerateur(reseau, sc);
                     break ;

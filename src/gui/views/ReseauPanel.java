@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 public class ReseauPanel extends VBox {
     private Label titreForm =new Label("Option:");
 
-    private Button validerReseauBtn = new Button("Valider le réseau");
+    private Button validerReseauBtn = new Button("Valider le reseau");
     private Button calculerCoutBtn = new Button("Optimiser le reseau");
-    private Button afficherReseauBtn = new Button("Afficher le réseau");
+    private Button afficherReseauBtn = new Button("Afficher le reseau");
 
     private Button sauvegarderBtn = new Button("Sauvegarder");
     private Button loadButton = new Button("Charger fichier");

@@ -36,7 +36,7 @@ public enum NiveauConsommation {
      */
     public static NiveauConsommation fromString(String niveau) {
         if (niveau == null) {
-            throw new IllegalArgumentException("Le niveau de consommation ne peut pas être null");
+            throw new IllegalArgumentException("Le niveau de consommation ne peut pas etre null");
         }
         switch (niveau.toUpperCase()) {
             case "BASSE": return BASSE;

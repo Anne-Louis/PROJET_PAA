@@ -17,7 +17,7 @@ public class SauvegardeReseau {
     public static void sauvegardeReseau(Reseau reseau, String fichier) throws FileAlreadyExistsException{
         fichier = fichier + ".txt";
         if (fichierExiste(fichier)){
-            throw new FileAlreadyExistsException("Un fichier contenant une configuration de réseau porte déjà ce nom !");
+            throw new FileAlreadyExistsException("Un fichier contenant une configuration de reseau porte deja ce nom !");
         }
         fichier = "src" + File.separator + "ressources" + File.separator + "solutions" + File.separator + fichier ;
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fichier)))) {

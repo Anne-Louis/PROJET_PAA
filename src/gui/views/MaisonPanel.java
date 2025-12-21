@@ -24,7 +24,7 @@ public class MaisonPanel extends VBox {
 
     private Label formLabel = new Label("Ajouter une Maison :");
     private Label nomLabel = new Label("Nom");
-    private Label typeLabel = new Label("Catégorie");
+    private Label typeLabel = new Label("Categorie");
 
     private TextField nomTextField = new TextField("nouvelle maison");
     private ComboBox<String> typeBox = new ComboBox<>();
@@ -63,7 +63,7 @@ public class MaisonPanel extends VBox {
 
         rightPane.setSpacing(5);
         rightPane.getChildren().addAll(
-            new Label("Maisons ajoutées"),
+            new Label("Maisons ajoutees"),
             maisonListView
         );
 
