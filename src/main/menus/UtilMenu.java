@@ -65,12 +65,8 @@ public class UtilMenu {
                     throw new NombreDeTermesException("Le nombre de termes utilisés doit être de deux !");
                 }
 				lectureOK = true;
-			} catch (InputMismatchException e) {
-				System.out.println("Il faut taper une chaîne de caractère");
-				sc.nextLine();
 			} catch (NombreDeTermesException e){
                 System.out.println(e);
-                sc.nextLine();
             }
 		}
 		return res;
@@ -89,7 +85,7 @@ public class UtilMenu {
         try {
             double cap = Double.parseDouble(ligne.split("\\s")[1]) ;
             if (cap <= 0){
-                System.out.println("Un générateur doit avoir une capacité strictement positive");
+                System.out.println("Un générateur doit avoir une capacité strictement positive !");
                 return ;
             }
             Generateur g = reseau.trouverGenerateurParNom(nom);
@@ -102,7 +98,7 @@ public class UtilMenu {
             reseau.ajouterGenerateur(gen) ;
             System.out.println("Le générateur " + gen.getNom() + " a bien été crée !");
         } catch (NumberFormatException e){
-            System.out.println(e);
+            System.out.println("Le générateur doit avoir un nombre comme puissance !");
         }
     }
 
@@ -113,7 +109,7 @@ public class UtilMenu {
      * @param scanner le scanner pour enregistrer les choix de l'utilisateur
      */
     public static void creerMaison(Reseau reseau, Scanner sc){
-        String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) : ";
+        String message = "Veuillez saisir la maison à enregistrer ainsi que sa consommation (BASSE, NORMAL, FORTE) (ex : M1 NORMAL) : ";
         String ligne = lireStringAuClavier(sc, message) ;
         String nom = ligne.split("\\s")[0] ;
         try {
@@ -129,7 +125,7 @@ public class UtilMenu {
             reseau.ajouterMaison(maison) ;
             System.out.println("La maison " + maison.getNom() + " a bien été crée !");
         } catch (IllegalArgumentException e){
-            System.out.println(e);
+            System.out.println("Le niveau de consommation de la maison doit être : BASSE, NORMAL ou FORTE");
         }
     }
 
@@ -150,8 +146,12 @@ public class UtilMenu {
 
         genC = reseau.trouverGenerateurParNom(ligne.split("\\s")[0]);
         maiC = reseau.trouverMaisonParNom(ligne.split("\\s")[1]);
-        genC = reseau.trouverGenerateurParNom(ligne.split("\\s")[1]);
-        maiC = reseau.trouverMaisonParNom(ligne.split("\\s")[0]);
+        if (genC == null){
+            genC = reseau.trouverGenerateurParNom(ligne.split("\\s")[1]);
+        }
+        if (maiC == null){
+            maiC = reseau.trouverMaisonParNom(ligne.split("\\s")[0]);
+        }
 
         if (genC == null){
             throw new GenerateurInexistantException("Le générateur n'existe pas");
@@ -251,6 +251,12 @@ public class UtilMenu {
         }
     }
 
+    /**
+     * Permet à l'utilisateur de charger un réseau depuis un fichier
+     * Si le fichier existe déjà, il est remplacé sinon un nouveau est crée.
+     * @param reseau
+     * @param sc
+     */
     public static Reseau chargerFichier(Reseau reseau, String filePath, int lambda) throws ImportException, InvalideReseauException{
         System.out.println("Votre fichier sera chargé depuis le dossier : src/ressources/configurations/");
         filePath = "src" + File.separator + "ressources" + File.separator + "configurations" + File.separator + filePath + ".txt";
@@ -275,7 +281,8 @@ public class UtilMenu {
                         reseau = chargerFichier(reseau, args[0], Integer.parseInt(args[1]));
                         Menu3.menu3(reseau, sc);
                     } catch(ImportException e){
-                        System.out.println(e);
+                        System.out.println("Le menu de création de réseau sera ouvert à la place");
+                        Menu1.menu1(reseau, sc);
                     } catch (InvalideReseauException e){
                         System.out.println("Le réseau n'est pas valide\n"+ e.getMessage());
                     }
