@@ -5,7 +5,7 @@ import java.util.Scanner;
 import gui.controllers.Controleur;
 import gui.main.AppUI;
 import main.components.Reseau;
-import main.exceptions.InvalideReseauException;
+
 
 /**
  * Menu tertiaire d'optimisation du réseau (menu 3).

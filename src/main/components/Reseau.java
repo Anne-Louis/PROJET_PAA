@@ -194,9 +194,9 @@ public class Reseau {
      * @return true si l’ajout a réussi, false sinon
      */
     public boolean ajouterConnexion(Connexion conn){
-        if (conn == null || this.connexions.contains(conn))
+        if (conn == null || this.connexions.contains(conn)){
             return false;
-
+        }
         conn.getGenerateur().ajouterConnexion(conn);
         conn.getMaison().setConnexion(conn);
 
@@ -212,8 +212,9 @@ public class Reseau {
      * @return true si la suppression a réussi, false sinon
      */
     public boolean supprimerConnexion(Connexion c){
-        if (c == null || this.connexions.contains(c))
+        if (c == null){
             return false;
+        }
         c.getGenerateur().supprimerConnexion(c);
         c.getMaison().setConnexion(null);
         return this.connexions.remove(c) ;

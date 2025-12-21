@@ -13,7 +13,7 @@
             "name": "Test simple",
             "request": "launch",
             "mainClass": "main.Main",
-            "args": "instance1 10"
+            "args": "instance_fausse3 10"
         }
     ],
     "java.project.sourcePaths": [
