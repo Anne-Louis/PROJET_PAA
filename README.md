@@ -144,7 +144,7 @@ Le fichier principal du programme se trouve dans le dossier `src/main/`. Vous po
 2. Naviguez jusqu'au dossier source du projet (cd PROJET_PAA)
 3. Exécutez la commande pour la compilation :
 ```
-javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java .src/test/io/*.java
+javac --module-path ./lib --add-modules javafx.controls,javafx.fxml -cp "./lib/junit.jar" -d ./bin ./src/main/Main.java ./src/main/components/*.java ./src/main/algorithmes/*.java ./src/main/io/*.java ./src/main/menus/*.java ./src/main/exceptions/*.java ./src/gui/main/*.java ./src/gui/controllers/*.java ./src/gui/views/*.java ./src/test/components/*.java ./src/test/io/*.java
 ```
 
 4. Puis la commande pour l'éxecution :
